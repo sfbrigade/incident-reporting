@@ -1,150 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <link rel="icon" href="../../favicon.ico">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" href="../../favicon.ico">
 
-  <title>SFPD Incident Reports Map</title>
+        <title>SFPD Incident Reports Map</title>
 
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css">
-  <link rel="stylesheet" href='//api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.css'>
-  <link rel="stylesheet" href='//api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' />
-  <link rel="stylesheet" href='//api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' />  
-  <link rel="stylesheet" href="css/daterangepicker.css">
-  <link rel="stylesheet" href="css/jquery.nouislider.css">
-  <link rel="stylesheet" href="css/style.css">
-  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-  <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-</head>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css">
+        <link rel="stylesheet" href="//api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.css">
+        <link rel="stylesheet" href="//api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css"/>
+        <link rel="stylesheet" href="//api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css"/>
+        <link rel="stylesheet" href="css/daterangepicker.css">
+        <link rel="stylesheet" href="css/jquery.nouislider.css">
+        <link rel="stylesheet" href="css/style.css">
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+          <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+            <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js">
+          </script>
+        <![endif]-->
+    </head>
 
-<body>
-  
-<div class="container">
+    <body>
 
-    <div class="starter-template">
-        <h1>Map SFPD Incident Reports</h1>
-        <div id="data-updated"></div>
-      
-	    <div id="sfim-controls" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <div id="address-control" class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-				<div class="form-group" id="searchgroup">
-					<label for="exampleInputEmail1">Address</label>
-					<input type="text" class="form-control typeahead" id="inputAddress" placeholder="Enter address" autocomplete="off">
-					<ul id="suggestresults" style="display:none;"></ul>
-				</div>			
-			</div>
-            <div id="slider-number-control" class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-			    <div class="form-group">
-                    <label for="range-slider-input">Radius (ft)</label>
-                    <input id="range-slider-input" class="form-control" type="text">
-                </div>			
-			</div>
-            <div id="slider-control" class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-                <div class="form-group">
-                    <div class="slider-body">
-                        <div id="range-slider"></div>
+        <div class="container">
+
+            <div class="starter-template">
+                <h1>Map SFPD Incident Reports</h1>
+                <div id="data-updated"></div>
+
+                <div id="sfim-controls" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div id="address-control" class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <div class="form-group" id="searchgroup">
+                            <label for="inputAddress">Address</label>
+                            <input type="text" class="form-control typeahead" name="inputAddress" id="inputAddress" placeholder="Enter address" autocomplete="off">
+                            <ul id="suggestresults" style="display:none;"></ul>
+                        </div>
                     </div>
-                </div>			
-			</div>			
-			<div id="date-control" class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-                <div class="form-group">
-                    <label for="select-time">Time period</label>
-                    <input id="daterange" type="text" class="form-control">
-                </div>			
-			</div>
-		</div>	  
-    </div>
-    <div id="map" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <div class="loading" style="display:none;">
-            <div class="circle"></div>
-        </div>
-    </div>
-	
-	<div id="controls-lower" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding:0px !important;">
-		<div id="btns-export" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding:0px !important;">
-			<div class="export-btn col-xs-12 col-sm-12 col-md-4 col-lg-4">
-				<a href="javascript:void(0)" id="download-csv"><button class="btn btn-sm btn-primary download-csv btn-block"><span class="glyphicon glyphicon-arrow-down"></span> Download CSV</button></a>
-			</div>
-			<div class="export-btn col-xs-12 col-sm-12 col-md-4 col-lg-4">
-				<a href="javascript:void(0)" id="open-geojsonio" target="_blank"><button class="btn btn-sm btn-primary open-geojsonio btn-block"><span class="glyphicon glyphicon-new-window"></span> Open with Geojson.io</button></a>
-			</div>
-			<div class="export-btn right col-xs-12 col-sm-12 col-md-4 col-lg-4">
-				<a hrer="javascript:void(0)" id="open-cartodb" target="_blank"><button class="btn btn-sm btn-primary open-cartodb btn-block"><span class="glyphicon glyphicon-new-window"></span> Open with CartoDB</button></a>
-			</div>
-		</div>
-		<div id="sfim-table" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding:0px !important;">	
-			<table id="example" class="display table" cellspacing="0" width="100%">
-				<thead>
-					<tr>
-						<th>IncidntNum</th>
-						<th>Category</th>
-						<th>Descript</th>
-						<th>Resolution</th>
-					</tr>
-				</thead>
-		 
-				<tfoot>
-					<tr>
-						<th>IncidntNum</th>
-						<th>Category</th>
-						<th>Descript</th>
-						<th>Resolution</th>
-					</tr>
-				</tfoot>
-			</table>
-		</div>
-	</div>
-	
-</div>
+                    <div id="slider-number-control" class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                        <div class="form-group">
+                            <label for="range-slider-input">Radius (ft)</label>
+                            <input id="range-slider-input" class="form-control" type="text">
+                        </div>
+                    </div>
+                    <div id="slider-control" class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                        <div class="form-group">
+                            <div class="slider-body">
+                                <div id="range-slider"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="date-control" class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                        <div class="form-group">
+                            <label for="select-time">Time period</label>
+                            <input id="daterange" type="text" class="form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="map" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="loading" style="display:none;">
+                    <div class="circle"></div>
+                </div>
+            </div>
 
-    <!-- Load jQuery from Google's CDN, so that it is likely to be already in the client's cache -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-  
-    <!-- Load pre-made scripts from vendors -->
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-    <script src='//api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.js'></script>
-    <script src='//api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>	
-    <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
-    <script src="//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js"></script>
-    <script src='js/vendor/moment.js'></script>
-    <script src='js/vendor/daterangepicker.js'></script>
-    <script src="js/vendor/jquery.nouislider.all.min.js"></script>
-    <script src="js/vendor/typeahead.bundle.js"></script>
-    <!-- Pre-made scripts loaded -->
-  
-    <!-- Loading modules -->
-    <script src="js/modules/resources.js"></script>
-    <script src="js/modules/map.js"></script>
-    <script src="js/modules/controls.js"></script>
-    <!-- Loading modules finished.... -->
-  
-    <script>
-    
-	    /**
-		    Lets start the whole application from a jQuery document.ready event			
+            <div id="controls-lower" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding:0px !important;">
+                <div id="btns-export" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding:0px !important;">
+                    <div class="export-btn col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <a href="javascript:void(0)" id="download-csv">
+                            <button class="btn btn-sm btn-primary download-csv btn-block">
+                                <span class="glyphicon glyphicon-arrow-down"></span>
+                                Download CSV</button>
+                        </a>
+                    </div>
+                    <div class="export-btn col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <a href="javascript:void(0)" id="open-geojsonio" target="_blank">
+                            <button class="btn btn-sm btn-primary open-geojsonio btn-block">
+                                <span class="glyphicon glyphicon-new-window"></span>
+                                Open with Geojson.io</button>
+                        </a>
+                    </div>
+                    <div class="export-btn right col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <a hrer="javascript:void(0)" id="open-cartodb" target="_blank">
+                            <button class="btn btn-sm btn-primary open-cartodb btn-block">
+                                <span class="glyphicon glyphicon-new-window"></span>
+                                Open with CartoDB</button>
+                        </a>
+                    </div>
+                </div>
+                <div id="sfim-table" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding:0px !important;">
+                    <table id="example" class="display table" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>IncidntNum</th>
+                                <th>Category</th>
+                                <th>Descript</th>
+                                <th>Resolution</th>
+                            </tr>
+                        </thead>
+
+                        <tfoot>
+                            <tr>
+                                <th>IncidntNum</th>
+                                <th>Category</th>
+                                <th>Descript</th>
+                                <th>Resolution</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Load jQuery from Google's CDN, so that it is likely to be already in the client's cache -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+        <!-- Load pre-made scripts from vendors -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/URI.js/1.18.1/URI.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/URI.js/1.18.1/jquery.URI.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="//api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.js"></script>
+        <script src="//api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js"></script>
+        <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+        <script src="//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+        <script src="js/vendor/moment.js"></script>
+        <script src="js/vendor/daterangepicker.js"></script>
+        <script src="js/vendor/jquery.nouislider.all.min.js"></script>
+        <script src="js/vendor/typeahead.bundle.js"></script>
+        <!-- Pre-made scripts loaded -->
+
+        <!-- Loading modules -->
+        <script src="js/modules/resources.js"></script>
+        <script src="js/modules/map.js"></script>
+        <script src="js/modules/controls.js"></script>
+        <script src="js/modules/urlSearch.js"></script>
+        <!-- Loading modules finished.... -->
+
+        <script>
+
+            /**
+		    Lets start the whole application from a jQuery document.ready event
 		*/
-	    $(document).ready(function(){
-		    
-			//Start the resources module first so that all resources we might ever need would be loaded
-			resourcesModule.init(initializeUI);
-			
-			function initializeUI(){
-			    //Start the UI relevant modules here in a callback function
-				mapModule.init($("#map"));
-				controlsModule.init($("#sfim-controls"), $("#controls-lower"));				
-			}
-			
-		});
-  </script>
-</body>
+            $(document).ready(function() {
+
+                //Start the resources module with a Promise first so that all resources we might ever need would be loaded
+                var initLoaded = new Promise(
+                  function(resolve, reject){
+                    resolve(resourcesModule.init(initializeUI))
+                    reject(function(){
+                      throw new Error("Our resources didn't load correctly, yikes!")
+                    })
+                  }
+                )
+
+                function initializeUI() {
+                    //Start the UI relevant modules here in a callback function
+                    mapModule.init($("#map"));
+                    controlsModule.init($("#sfim-controls"), $("#controls-lower"));
+                }
+
+                // then once all resources are loaded check to see if there is a search in the URL
+                initLoaded.then(function(){
+                  if(location.search) {
+                    urlSearch.runURLsearch();
+                  }
+                }, function(error){
+                  console.error(error)
+                })
+
+
+
+            });
+        </script>
+    </body>
 
 </html>
