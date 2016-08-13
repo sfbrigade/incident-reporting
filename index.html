@@ -128,22 +128,21 @@
     <!-- Loading modules finished.... -->
   
     <script>
-    
-	    /**
-		    Lets start the whole application from a jQuery document.ready event			
-		*/
-	    $(document).ready(function(){
-		    
-			//Start the resources module first so that all resources we might ever need would be loaded
-			resourcesModule.init(initializeUI);
-			
-			function initializeUI(){
-			    //Start the UI relevant modules here in a callback function
-				mapModule.init($("#map"));
-				controlsModule.init($("#sfim-controls"), $("#controls-lower"));				
-			}
-			
-		});
+      /**
+       * Lets start the whole application from a jQuery document.ready event
+       */
+      $(document).ready(function(){
+
+        //Start the resources module first so that all resources we might ever need would be loaded
+        resourcesModule.init(initializeUI);
+
+        function initializeUI(){
+          //Start the UI relevant modules here in a callback function
+          mapModule.init($("#map"));
+          controlsModule.init($("#sfim-controls"), $("#controls-lower"));
+        }
+
+      });
   </script>
 </body>
 
