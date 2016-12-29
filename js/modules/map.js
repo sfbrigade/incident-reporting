@@ -42,17 +42,29 @@ var mapModule = (function(window,$){
     function _drawMap(){
         L.mapbox.accessToken = _mapboxAccessToken;
 
+        var defaultCoordinates = [37.767806, -122.438153];
+
 		//Create our map instance
-		_components["map"] = L.mapbox.map(_mapContainer.prop("id"), _mapboxID).setView([37.767806, -122.438153], 12);
-		_components["layers"]["searchradius"] = L.circle([37.767806, -122.438153], 402.3).addTo(_components["map"]);
+		_components["map"] = L.mapbox.map(_mapContainer.prop("id"), _mapboxID).setView(defaultCoordinates, 12);
+		_components["layers"]["searchradius"] = L.circle(defaultCoordinates, 402.3);
 
 		//Plot the initial user location
-        _setUserLocation({ "type": "Feature","properties": {"marker-size": "large"}, "geometry": {"type": "Point", "coordinates": [-122.438153,37.767806]}});
+        _setUserCoordinates(defaultCoordinates);
 
 		//Add all layers to the map instance
 		_enableAllLayers();
 
 	}
+
+    function _locateUser(){
+        return new Promise(function(resolve, reject) {
+            _components["map"].once('locationfound', function(locationEvent){
+                resolve([locationEvent.latlng.lat, locationEvent.latlng.lng]);
+            });
+            _components["map"].once('locationerror', reject);
+            _components["map"].locate();
+        });
+    }
 
     /**
       * @param {object} response
@@ -89,10 +101,10 @@ var mapModule = (function(window,$){
 		{
 		    //We received no results from the API, delete map contents
 			_components["layers"]["incidents"].clearLayers();
-			
+
 			//Clear the clusters from the map as well, not just the feature layer
 			_components["cluster"].clearLayers();
-			
+
 		}
 
 		//Set map bounds to the bounds of the search radius
@@ -105,14 +117,21 @@ var mapModule = (function(window,$){
     /**
       * @param {object} feature
     */
-	function _plotUserLocation(feature){
-        _setUserLocation(feature);
-		_components["layers"]["searchradius"].setLatLng([feature.geometry.coordinates[1], feature.geometry.coordinates[0]]);
-		_components["layers"]["searchradius"].setRadius(_getUserSearchRadius());
-	}
+	function _setUserLocation(feature){
+	    _components["layers"]["user"].setGeoJSON(feature);
+        _components["layers"]["searchradius"].setLatLng([feature.geometry.coordinates[1], feature.geometry.coordinates[0]]);
+    }
 
-	function _setUserLocation(geoJson){
-	    _components["layers"]["user"].setGeoJSON(geoJson);
+    function _setUserCoordinates(coordinates){
+        var geoJson = {
+            "type": "Feature",
+            "properties": {"marker-size": "large"},
+            "geometry": {
+                "type": "Point",
+                "coordinates": [coordinates[1], coordinates[0]]
+            }
+        };
+        _setUserLocation(geoJson);
     }
 
 	function _getUserLocation(){
@@ -160,7 +179,7 @@ var mapModule = (function(window,$){
 
     return {
 	    init: _init,
-  		plotUserLocation: _plotUserLocation,
+  		plotUserLocation: _setUserLocation,
   		centerMapOnLocation: _centerMapOnLocation,
   		getUserSearchRadius:_getUserSearchRadius,
   		setUserSearchRadius:_setUserSearchRadius,
@@ -171,7 +190,8 @@ var mapModule = (function(window,$){
         getMapboxAccessToken: _getMapboxAccessToken,
   		drawApiResponse:_drawApiResponse,
   		showLoader: _showLoader,
-  		hideLoader: _hideLoader
+  		hideLoader: _hideLoader,
+        locateUser: _locateUser
     };
 
 })(window, jQuery);

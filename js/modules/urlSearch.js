@@ -33,7 +33,7 @@ var urlSearch = (function() {
                 city: userLocation.properties.locality,
                 state: userLocation.properties.region,
                 zip: userLocation.properties.postalcode
-            })
+            });
         }
         if (dates) {
             searchInput = Object.assign(searchInput, dates);

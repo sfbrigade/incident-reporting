@@ -51,15 +51,21 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <h1>San Francisco Crime Data</h1>
-                        <h2>SFPD data provided by <a href="https://data.sfgov.org/" target="_blank">SF OpenData</a></h2>   
+                        <h2>SFPD data provided by <a href="https://data.sfgov.org/" target="_blank">SF OpenData</a></h2>
                     </div>
                 </div>
-                
                     <div id="sfim-controls" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div id="address-control" class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                         <div class="form-group" id="searchgroup">
-                            <label for="inputAddress">Address</label>
+                          <label for="inputAddress">Address</label>
+                          <div class="input-group">
                             <input type="text" class="form-control typeahead" name="inputAddress" id="inputAddress" placeholder="Enter address" autocomplete="off" data-provide="typeahead">
+                            <span class="input-group-btn">
+                              <button id="geolocation" class="btn btn-primary" type="button">
+                                <span class="glyphicon glyphicon-screenshot"></span>
+                              </button>
+                            </span>
+                          </div>
                         </div>
                     </div>
                     <div id="slider-number-control" class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
