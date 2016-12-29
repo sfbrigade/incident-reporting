@@ -54,7 +54,9 @@
                         <h2>SFPD data provided by <a href="https://data.sfgov.org/" target="_blank">SF OpenData</a></h2>
                     </div>
                 </div>
-                    <div id="sfim-controls" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div id="alert-row" class="row">
+                </div>
+                <div id="sfim-controls" class="row">
                     <div id="address-control" class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                         <div class="form-group" id="searchgroup">
                           <label for="inputAddress">Address</label>
@@ -232,6 +234,7 @@
         <script src="js/modules/map.js"></script>
         <script src="js/modules/controls.js"></script>
         <script src="js/modules/urlSearch.js"></script>
+        <script src="js/modules/alerts.js"></script>
         <!-- Loading modules finished.... -->
 
         <script>
@@ -265,9 +268,6 @@
                 }, function(error){
                   console.error(error)
                 })
-
-
-
             });
         </script>
     </body>

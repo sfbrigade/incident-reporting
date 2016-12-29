@@ -164,7 +164,10 @@ var controlsModule = (function(window, $) {
                         controlsModule.searchCrime(newGeoJson);
                     });
                 })
-                .catch(console.error);
+                .catch(function(error) {
+                    alertsModule.showAlert('warning', "There was an error retrieving your location");
+                    console.error(error);
+                });
         });
     }
 
