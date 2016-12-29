@@ -18,6 +18,7 @@ var controlsModule = (function(window, $) {
             _setDataUpdated();
             _setDraggingMouse();
             _setInputAddress();
+            _setGeolocation();
             _setSlider();
             _setDateRange();
         } else {
@@ -139,6 +140,31 @@ var controlsModule = (function(window, $) {
                 return res;
             },
             minLength: 4, items: 10
+        });
+    }
+
+    function _setGeolocation() {
+        _controlBarContainer.find('#geolocation').click(function() {
+            mapModule.locateUser()
+                .then(function(coordinates) {
+                    var latitude = coordinates[0];
+                    var longitude = coordinates[1];
+                    resourcesModule.reverseGeocoding([longitude, latitude], function(response) {
+                        var address = response.features[0].place_name;
+                        var newGeoJson = response.features[0];
+                        newGeoJson.properties.name = address.split(', ')[0];
+                        newGeoJson.properties.locality = response.features[1].text;
+                        newGeoJson.properties.region = response.features[3].text;
+                        newGeoJson.properties.postalcode = response.features[2].text;
+                        address = newGeoJson.properties.name + ', ' + newGeoJson.properties.locality + ', ' + newGeoJson.properties.region;
+                        clickedIndex = $('.typeahead').val(address);
+
+                        mapModule.plotUserLocation(newGeoJson);
+                        mapModule.centerMapOnLocation(newGeoJson);
+                        controlsModule.searchCrime(newGeoJson);
+                    });
+                })
+                .catch(console.error);
         });
     }
 
