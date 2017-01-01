@@ -186,8 +186,8 @@ var controlsModule = (function(window, $) {
                     'This Year': [moment().startOf('year'), moment(_options["lastDate"])],
                     'Last Year': [moment().subtract(1, 'year').startOf('year'), moment().subtract(1, 'year').endOf('year')]
                 },
-                startDate: urlSearch.getStartDate() || _options["lastDate"].subtract(29, 'days'), // OR isn't needed here, but would then totally depend on urlSearch module
-                endDate: urlSearch.getEndDate() || _options["lastDate"], // OR isn't needed here, but would then totally depend on urlSearch module
+                startDate: urlSearch.getStartDate() || moment(_options["lastDate"]).subtract(29, 'days'), // OR isn't needed here, but would then totally depend on urlSearch module
+                endDate: urlSearch.getEndDate() || moment(_options["lastDate"]), // OR isn't needed here, but would then totally depend on urlSearch module
                 format: 'MM/DD/YYYY'
             },
             function(start, end) {
