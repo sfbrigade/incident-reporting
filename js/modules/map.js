@@ -43,7 +43,22 @@ var mapModule = (function(window,$){
         L.mapbox.accessToken = _mapboxAccessToken;
 
 		//Create our map instance
-		_components["map"] = L.mapbox.map(_mapContainer.prop("id"), _mapDesignID).setView([37.767806, -122.438153], 12);
+		_components["map"] = L.mapbox.map(_mapContainer.prop("id"), _mapDesignID, {
+					// True by default, false if you want a wild map
+				  sleep: true,
+				  // time(ms) for the map to fall asleep upon mouseout
+					sleepTime: 750,
+				  // time(ms) until map wakes on mouseover
+					wakeTime: 750,
+				  // Defines whether or not the user is prompted on how to wake map
+					sleepNote: true,
+				  // Allows ability to override note styling
+					sleepNotEstyel: { color: 'red' },
+				  // Should hovering wake the map? (clicking always will)
+					hoverToWake: true,
+				  // Opacity (between 0 and 1) of inactive map
+					sleepOpacity: .7	
+				}).setView([37.767806, -122.438153], 12);
 		_components["layers"]["searchradius"] = L.circle([37.767806, -122.438153], 402.3).addTo(_components["map"]);
 
 		//Plot the initial user location
