@@ -59,7 +59,7 @@ var mapModule = (function(window,$){
 					//A message to inform users of waking map
 					wakeMessage: 'Click to Wake',
 				  //Opacity (between 0 and 1) of inactive map
-					sleepOpacity: 0 
+					sleepOpacity: 1 
 				}).setView([37.767806, -122.438153], 12);
 		_components["layers"]["searchradius"] = L.circle([37.767806, -122.438153], 402.3).addTo(_components["map"]);
 
