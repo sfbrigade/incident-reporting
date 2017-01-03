@@ -6,7 +6,8 @@ var controlsModule = (function(window, $) {
     var _table;
     var _options = {
         "startDate": null,
-        "endDate": null
+        "endDate": null,
+        "lastDate": null
     };
 
     /**
@@ -19,7 +20,6 @@ var controlsModule = (function(window, $) {
             _setDraggingMouse();
             _setInputAddress();
             _setSlider();
-            _setDateRange();
         } else {
             console.log("Upper controls container doesn't exist"); //Error
         }
@@ -171,14 +171,14 @@ var controlsModule = (function(window, $) {
 
 
     function _setDateRange() {
-        _options["startDate"] = moment().subtract(29, 'days').format('YYYY-MM-DD');
-        _options["endDate"] = moment().format('YYYY-MM-DD');
+	    _options["startDate"] = moment(_options["lastDate"]).subtract(29, 'days').format('YYYY-MM-DD');
+        _options["endDate"] = moment(_options["lastDate"]).format('YYYY-MM-DD');
 
         _controlBarContainer.find('#daterange').val(urlSearch.getStartDate().format('MM/DD/YYYY') + ' - ' + urlSearch.getEndDate().format('MM/DD/YYYY'));
 
         _controlBarContainer.find('#daterange').daterangepicker({
                 ranges: {
-                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                    'Last 30 Days': [moment(_options["lastDate"]).subtract(29, 'days'), moment(_options["lastDate"])],
                     'This Month': [moment().startOf('month'), moment().endOf('month')],
                     'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
                     'This Quarter': [moment().startOf('quarter'), moment().endOf('quarter')],
@@ -194,7 +194,11 @@ var controlsModule = (function(window, $) {
                 _options["startDate"] = start.format('YYYY-MM-DD');
                 _options["endDate"] = end.format('YYYY-MM-DD');
                 _controlBarContainer.find('#daterange').val(start.format('MM/DD/YYYY') + ' - ' + end.format('MM/DD/YYYY'));
-
+                if (_options["endDate"] > _options["lastDate"]) {
+                    $('#data-updated').css("color", "red");
+                } else {
+                    $('#data-updated').css("color", "black");
+                }
                 controlsModule.searchCrime(mapModule.getUserLocation());
             });
     }
@@ -286,7 +290,9 @@ var controlsModule = (function(window, $) {
         var query = "?$select=date,time&$limit=1&$order=date DESC,time DESC";
         var datasetRequest = resourcesModule.getDatasetJsonURL(query);
         $.getJSON(datasetRequest, function(data) {
-            $('#data-updated').html('<b>Data available through ' + moment(data[0].date).format('MMMM DD, YYYY') + ' at ' + moment(data[0].time, 'HH:mm').format('hh:mm a') + '</b>')
+            $('#data-updated').html('<b>Data available through ' + moment(data[0].date).format('MMMM DD, YYYY') + ' at ' + moment(data[0].time, 'HH:mm').format('hh:mm a') + '</b>');
+            _options["lastDate"] = moment(data[0].date).format('YYYY-MM-DD');
+            _setDateRange();
         });
     }
 
@@ -296,6 +302,10 @@ var controlsModule = (function(window, $) {
 
     function _getEndDate() {
         return _options["endDate"];
+    }
+
+    function _getLastDate() {
+        return _options["lastDate"];
     }
 
     function _loadRadialIncidentData() {
@@ -350,6 +360,7 @@ var controlsModule = (function(window, $) {
         searchCrime: _searchCrime,
         getEndDate: _getEndDate,
         getStartDate: _getStartDate,
+        getLastDate: _getLastDate,
         refreshDownloadButtonURLs: _refreshDownloadButtonURLs,
         loadDataToTable: _loadDataToTable
     };
