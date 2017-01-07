@@ -69,6 +69,7 @@ var formModule = (function(window, $) {
             viewModelModule.endDate = formattedEndDate;
             $('#daterange').val(formattedStartDate + ' - ' + formattedEndDate);
 
+						alert(startDate + " " + endDate);
             pageModule.loadIncidentData();
         });
     }
