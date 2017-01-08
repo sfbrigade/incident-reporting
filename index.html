@@ -221,50 +221,7 @@
         <script src="js/vendor/daterangepicker.js"></script>
         <script src="js/vendor/jquery.nouislider.all.min.js"></script>
         <script src="js/vendor/bootstrap3-typeahead.js"></script>
-<<<<<<< HEAD
         <script src="js/vendor/Leaflet.Sleep.js"></script>
-        <!-- Pre-made scripts loaded -->
-
-        <!-- Loading modules -->
-        <script src="js/modules/resources.js"></script>
-        <script src="js/modules/map.js"></script>
-        <script src="js/modules/controls.js"></script>
-        <script src="js/modules/urlSearch.js"></script>
-        <!-- Loading modules finished.... -->
-
-        <script>
-
-            /**
-            Lets start the whole application from a jQuery document.ready event
-        */
-            $(document).ready(function() {
-
-                //Start the resources module with a Promise first so that all resources we might ever need would be loaded
-                var initLoaded = new Promise(
-                  function(resolve, reject){
-                    resolve(resourcesModule.init(initializeUI))
-                    reject(function(){
-                      throw new Error("Our resources didn't load correctly, yikes!")
-                    })
-                  }
-                )
-
-                function initializeUI() {
-                    //Start the UI relevant modules here in a callback function
-                    mapModule.init($("#map"));
-                    controlsModule.init($("#sfim-controls"), $("#controls-lower"));
-                }
-
-                // then once all resources are loaded check to see if there is a search in the URL
-                initLoaded.then(function(){
-                  if(location.search) {
-                    urlSearch.runURLsearch();
-                  }
-                }, function(error){
-                  console.error(error)
-                })
-=======
->>>>>>> dev
 
         <!-- Load services -->
         <script src="js/services/endpoints.js"></script>
