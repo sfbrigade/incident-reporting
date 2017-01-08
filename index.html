@@ -18,6 +18,7 @@
         <link rel="stylesheet" href="//api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.css">
         <link rel="stylesheet" href="//api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css"/>
         <link rel="stylesheet" href="//api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css"/>
+        <link rel="stylesheet" href="//api.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.2.3/leaflet.draw.css" />
         <link rel="stylesheet" href="css/daterangepicker.css">
         <link rel="stylesheet" href="css/jquery.nouislider.css">
         <link rel="stylesheet" href="css/style.css">
@@ -210,6 +211,7 @@
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
         <script src="//api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.js"></script>
         <script src="//api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js"></script>
+        <script src="//api.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.2.3/leaflet.draw.js"></script>
         <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
         <script src="//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js"></script>
         <script src="//cdn.datatables.net/buttons/1.2.1/js/dataTables.buttons.min.js"></script>
@@ -219,51 +221,24 @@
         <script src="js/vendor/daterangepicker.js"></script>
         <script src="js/vendor/jquery.nouislider.all.min.js"></script>
         <script src="js/vendor/bootstrap3-typeahead.js"></script>
-        <!-- Pre-made scripts loaded -->
+        <script src="js/vendor/Leaflet.Sleep.js"></script>
 
-        <!-- Loading modules -->
-        <script src="js/modules/resources.js"></script>
-        <script src="js/modules/map.js"></script>
-        <script src="js/modules/controls.js"></script>
+        <!-- Load services -->
+        <script src="js/services/endpoints.js"></script>
+        <script src="js/services/addressService.js"></script>
+        <script src="js/services/incidentService.js"></script>
+
+        <!-- Load modules -->
+        <script src="js/modules/viewModel.js"></script>
         <script src="js/modules/urlSearch.js"></script>
-        <!-- Loading modules finished.... -->
+        <script src="js/modules/history.js"></script>
+        <script src="js/modules/form.js"></script>
+        <script src="js/modules/map.js"></script>
+        <script src="js/modules/datasetLinks.js"></script>
+        <script src="js/modules/table.js"></script>
+        <script src="js/modules/page.js"></script>
 
-        <script>
-
-            /**
-            Lets start the whole application from a jQuery document.ready event
-        */
-            $(document).ready(function() {
-
-                //Start the resources module with a Promise first so that all resources we might ever need would be loaded
-                var initLoaded = new Promise(
-                  function(resolve, reject){
-                    resolve(resourcesModule.init(initializeUI))
-                    reject(function(){
-                      throw new Error("Our resources didn't load correctly, yikes!")
-                    })
-                  }
-                )
-
-                function initializeUI() {
-                    //Start the UI relevant modules here in a callback function
-                    mapModule.init($("#map"));
-                    controlsModule.init($("#sfim-controls"), $("#controls-lower"));
-                }
-
-                // then once all resources are loaded check to see if there is a search in the URL
-                initLoaded.then(function(){
-                  if(location.search) {
-                    urlSearch.runURLsearch();
-                  }
-                }, function(error){
-                  console.error(error)
-                })
-
-
-
-            });
-        </script>
+        <!-- Start the application -->
+        <script src="js/start.js"></script>
     </body>
-
 </html>

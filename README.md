@@ -25,6 +25,15 @@ Create a single place for all universities and colleges in the United States to 
  - **Front-end developer!** Yup. Self-explanatory if you read the above paragraph. Bonus points if you love APIs and are up for the challenge of keeping the whole project browser-based... even the coming versions.
  - **Future project lead!** If you're interested managing in this project, come check it out asap and get up to speed... then build it out so any police department in the country can use it. **Time savings in the multiple thousands of workdays across the entire U.S.**
 
+## Setting Up The Project
+To get up and running, you will need your own local version of the existing codebase. Once you've made some changes to your copy of the code, it will need to be reviewed before completing a pull request. These steps will help you set up a Github project page so that your changes can be reviewed.
+
+1. Fork the project on this page at the top-right corner
+2. Clone your newly forked repository into whatever directory you'd like to work in using `git clone https://github.com/yourusername/sf-crime-data.git`
+3. Make a small change and commit
+4. Go to your project on Github and hit the Settings button. Scroll down and find the Github Pages section. You should have the gh-pages branch on source. Switch to a different branch and hit save. Then, switch back to the gh-pages branch and hit save
+5. Now, head over to http://yourusername.github.io/sf-crime-data and you (and others) can see your version of the app when you commit changes
+
 ##Running Codebase Locally
 If you want to download the github repository and run the code locally on your Apple machine,
 - open terminal
