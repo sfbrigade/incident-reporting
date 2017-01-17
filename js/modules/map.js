@@ -3,7 +3,7 @@ var mapModule = (function(window,$) {
     var MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoiY3JpbWVkYXRhc2YiLCJhIjoiY2l2Y296YTl2MDE2bTJ0cGI1NGoyY2RzciJ9.DRX-7gKkJy4FT2Q1Qybb2w';
     var MAPBOX_MAP_STYLE_ID = 'lightfox.1n10e3dp';
     var MAP_CONTAINER_ELEMENT_ID = 'map';
-    
+
     var SEARCH_MARKER_GEOJSON = {
         type: 'Feature',
         geometry: { type: 'Point' },
