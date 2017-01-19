@@ -40,7 +40,11 @@ var mapModule = (function(window,$) {
 
     var map;
 
-    function _init() {
+    var generatePopupContent;
+
+    function _init(generatePopupContent_) {
+        generatePopupContent = generatePopupContent_;
+
         L.mapbox.accessToken = MAPBOX_ACCESS_TOKEN;
         map = L.mapbox.map(MAP_CONTAINER_ELEMENT_ID, MAPBOX_MAP_STYLE_ID);
 
@@ -103,15 +107,11 @@ var mapModule = (function(window,$) {
 
         incidentLayer.setGeoJSON(incidentGeoJson).eachLayer(function(layer) {
             incidentClusterGroup.addLayer(layer);
-            layer.bindPopup(_buildIncidentPopupContent(layer.feature.properties));
+            layer.bindPopup(generatePopupContent(layer.feature.properties));
         });
 
         incidentLayer.clearLayers();
         map.fitBounds(searchAreaGroup.getBounds());
-    }
-
-    function _buildIncidentPopupContent(properties) {
-        return properties.descript + '; INCIDENT #: ' + properties.incidntnum;
     }
 
     return {
