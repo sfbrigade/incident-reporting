@@ -52,14 +52,15 @@ var urlSearch = (function() {
     function _getStartDate() {
         var uri = new URI();
         uri = uri.search(true);
-        var date = uri.startDate ? moment(uri.startDate) : moment().subtract(29, 'days');
+        var date = uri.startDate ? moment(uri.startDate) : moment(controlsModule.getLastDate()).subtract(29, 'days');
         return date;
     }
 
     function _getEndDate() {
         var uri = new URI();
         uri = uri.search(true);
-        return moment(uri.endDate);
+        var date = uri.endDate ? moment(uri.endDate) : moment(controlsModule.getLastDate());
+        return date;
     }
 
     function _getRadius(unit){
