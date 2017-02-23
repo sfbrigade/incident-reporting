@@ -1,5 +1,5 @@
 # SF Crime Data
-Pull incident reports from SF Open Data
+A quick prototype to test pulling incident reports from SF Open Data
 
 Note: this repository takes advantage of [ZenHub](https://www.zenhub.io/). If you haven't added it to your Github yet, it's recommended to better understand how issues are prioritized.
 
@@ -19,17 +19,43 @@ Satisfy SFPD crime reporting needs, as well as other interested parties, includi
 Create a single place for all universities and colleges in the United States to collect the data for their Clery Act reporting requirements, incorporating data from as many police departments in the country as possible.
 
 
-##Project Needs
+## Project Needs
  - **Copywriter!** The site needs more and easily understandable information on it. Zero coding required.
  - **User Researcher!** Can you reach out to a university's crime data reporting team, understand their needs (without biasing them), and take notes as they test this application? Zero coding required.
  - **Front-end developer!** Yup. Self-explanatory if you read the above paragraph. Bonus points if you love APIs and are up for the challenge of keeping the whole project browser-based... even the coming versions.
  - **Future project lead!** If you're interested managing in this project, come check it out asap and get up to speed... then build it out so any police department in the country can use it. **Time savings in the multiple thousands of workdays across the entire U.S.**
 
-##Running Codebase Locally
+## Running Codebase Locally
 If you want to download the github repository and run the code locally on your Apple machine,
 - open terminal
 - go to the folder directory 
 - run 'python -m SimpleHTTPServer'
+
+## Contributing: Getting Started
+* Attend a [Code for San Francisco](http://codeforsanfrancisco.org/events) orientation 
+* Get on [Slack](http://c4sf.me/slack)
+  * Add prj-sf-crime-data as a channel
+* Get on [GitHub](http://c4sf.me/joingithub)
+  * Find sfbrigade/sf-crime-data
+* Add [ZenHub](https://www.zenhub.com/) plug-in to GitHub
+  * review how ZenHub works
+* Review issues on ZenHub boards (within GitHub: sfbrigade/sf-crime-data)
+* Clone the site to your dev machine and get it running locally
+  * See readme.md "Running Codebase Locally"
+  * Alternately use your GitHub account's hosting option for gh-pages
+* Visit [SF OpenData](https://data.sfgov.org/)
+  * Review [SFPD available data](https://data.sfgov.org/Public-Safety/SFPD-Incidents-from-1-January-2003/tmnf-yvry)
+  * Review how to call the API (Export)
+* Visit [Mapbox.com](https://www.mapbox.com/)
+  * Review their map offerings
+  * Review how to call the API
+* Read the [Wiki](https://github.com/sfbrigade/sf-crime-data/wiki) on GitHub sfbrigade/sf-crime-data
+* If you want to contribute to the code base...
+  * Set up a "public hosting" location like GitHub pages or Firebase
+  	* This will be used to share your changes for team testing and code reviews
+  * Comment on the issue you would like to work on
+  * Continue to collaborate and code using Slack and GitHub
+* If "life happens" and you won't have time to finish an issue due to new demands, do let us know, so we can re-assign.
 
 ## What's Next?
 After speaking with the Crime Data Analysis Unit at the SFPD on 5/6/16 for initial user **research**, the current prototype satisfies their minimum needs. They plan to direct future inquiring universities and colleges directly to [http://sfcrimedata.org]. Great!
