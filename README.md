@@ -1,5 +1,5 @@
 # SF Crime Data
-A quick prototype to test pulling incident reports from SF Open Data
+Pull incident reports from SF Open Data
 
 Note: this repository takes advantage of [ZenHub](https://www.zenhub.io/). If you haven't added it to your Github yet, it's recommended to better understand how issues are prioritized.
 
