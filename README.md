@@ -38,7 +38,7 @@ If you want to download the github repository and run the code locally on your A
 * Get on [GitHub](http://c4sf.me/joingithub)
   * Find sfbrigade/sf-crime-data
 * Add [ZenHub](https://www.zenhub.com/) plug-in to GitHub
-  * review how ZenHub works
+  * Review how ZenHub works
 * Review issues on ZenHub boards (within GitHub: sfbrigade/sf-crime-data)
 * Clone the site to your dev machine and get it running locally
   * See readme.md "Running Codebase Locally"
