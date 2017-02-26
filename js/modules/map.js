@@ -3,7 +3,7 @@ var mapModule = (function(window,$) {
     var MAPBOX_ACCESS_TOKEN = resourceTokensModule.MAPBOX_ACCESS_TOKEN;
     var MAPBOX_MAP_STYLE_ID = 'lightfox.1n10e3dp';
     var MAP_CONTAINER_ELEMENT_ID = 'map';
-    
+
     var SEARCH_MARKER_GEOJSON = {
         type: 'Feature',
         geometry: { type: 'Point' },
