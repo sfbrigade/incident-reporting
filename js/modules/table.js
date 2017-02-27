@@ -7,7 +7,7 @@ var tableModule = (function(window, $) {
         },
         dom: '<"table-buttons"<"table-buttons"Bf>l>t<"table-buttons"ip>',
         oLanguage: {
-            sSearch: "Filter results:"
+            sSearch: "Search my results:"
         },
         buttons: [{ extend: 'colvis', text: 'Select Columns'}],
         fixedHeader: {
