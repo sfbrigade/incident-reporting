@@ -1,254 +1,246 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <link rel="icon" href="../../favicon.ico">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" href="../../favicon.ico">
 
-  <title>Starter Template for Bootstrap</title>
+        <title>SF Crime Data</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Franklin:300,400,500|Montserrat">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css">
+        <link rel="stylesheet" href="//cdn.datatables.net/buttons/1.2.1/css/buttons.dataTables.min.css">
+        <link rel="stylesheet" href="//cdn.datatables.net/fixedheader/3.1.2/css/fixedHeader.dataTables.min.css">
+        <link rel="stylesheet" href="//api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.css">
+        <link rel="stylesheet" href="//api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css"/>
+        <link rel="stylesheet" href="//api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css"/>
+        <link rel="stylesheet" href="//api.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.2.3/leaflet.draw.css" />
+        <link rel="stylesheet" href="css/daterangepicker.css">
+        <link rel="stylesheet" href="css/jquery.nouislider.css">
+        <link rel="stylesheet" href="css/style.css">
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+          <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+            <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js">
+          </script>
+        <![endif]-->
+    </head>
 
-  <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-  <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.css' rel='stylesheet'>
-  <link rel="stylesheet" href="/daterangepicker.css">
-  <link rel="stylesheet" href="/jquery.nouislider.css">
-  <link rel="stylesheet" href="/style.css">
-  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-  <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-</head>
+    <body>
 
-<body>
-  
-  <div class="container">
+        <div class="container">
 
-    <div class="starter-template">
-      <h1>Map SFPD Incident Reports</h1>
-      <form id="formaddress" class="form-inline">
-        <div class="form-group" id="searchgroup">
-          <label for="exampleInputEmail1">Address</label>
-          <input type="text" class="form-control typeahead" id="inputAddress" placeholder="Enter address" autocomplete="off">
-          <ul id="suggestresults" style="display:none;">
-          </ul>
-        </div>
-        <div class="form-group">
-          <label for="range-slider-input">Radius</label>
-          <input id="range-slider-input" class="form-control" type="text" style="width:60px; text-align: right;"> ft
-        </div>
-        <div class="form-group">
-          <div style="width:150px; float:right;">
-            <div id="range-slider"></div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="select-time">Time period</label>
-          <input id="daterange" type="text" class="form-control">
-        </div>
-        <button type="submit" class="btn btn-primary">Map Incidents</button>
-      </form>
-    </div>
-    <div id="map" style="width:100%; height:500px; margin-top: 20px;">
+            <div class="starter-template">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                         <p id="beta">* Beta test *</p>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                         <!-- Button trigger modal -->
+                        <button type="button" id="feedback-btn" class="hidden-xs btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#myModal">
+                          Leave Feedback
+                        </button>
+                        <button type="button" id="feedback-btn" class="visible-xs btn btn-primary btn-xs pull-right" data-toggle="modal" data-target="#myModal">
+                          Leave Feedback
+                        </button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <h1>San Francisco Crime Data</h1>
+                        <h2>SFPD data provided by <a href="https://data.sfgov.org/" target="_blank">SF OpenData</a></h2>   
+                    </div>
+                </div>
+                
+                    <div id="sfim-controls" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div id="address-control" class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <div class="form-group" id="searchgroup">
+                            <label for="input-address">Address</label>
+                            <input type="text" class="form-control typeahead" id="input-address" placeholder="Enter address" autocomplete="off" data-provide="typeahead">
+                        </div>
+                    </div>
+                    <div id="slider-number-control" class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                        <div class="form-group">
+                            <label for="range-slider-input">Radius (ft)</label>
+                            <input id="range-slider-input" class="form-control" type="text">
+                        </div>
+                    </div>
+                    <div id="slider-control" class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                        <div class="form-group">
+                            <div class="slider-body">
+                                <label for="range-slider">Adjust Radius</label>
+                                <div id="range-slider"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="date-control" class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                        <div class="form-group">
+                            <label for="select-time">Time period</label>
+                            <input id="daterange" type="text" class="form-control">
+                            <div class="subheader" id="data-updated"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="map" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="loading" style="display:none;">
+                    <div class="circle"></div>
+                </div>
+            </div>
 
-    </div>
+            <div id="controls-lower" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding:0px !important;">
+                <div id="btns-export" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding:0px !important;">
+                    <div class="export-btn col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                        <a href="javascript:void(0)" id="download-csv">
+                            <button class="btn btn-sm btn-primary download-csv btn-block">
+                                <span class="glyphicon glyphicon-arrow-down"></span>
+                                Download CSV</button>
+                        </a>
+                    </div>
+                    <div class="export-btn col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                        <a href="javascript:void(0)" id="open-geojsonio" target="_blank">
+                            <button class="btn btn-sm btn-primary open-geojsonio btn-block">
+                                <span class="glyphicon glyphicon-new-window"></span>
+                                Open with Geojson.io</button>
+                        </a>
+                    </div>
+                    <div class="export-btn col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                        <a href="javascript:void(0)" id="open-cartodb" target="_blank">
+                            <button class="btn btn-sm btn-primary open-cartodb btn-block">
+                                <span class="glyphicon glyphicon-new-window"></span>
+                                Open with CartoDB</button>
+                        </a>
+                    </div>
+                    <div class="export-btn right col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                        <a href="mailto:?subject=My results from sfcrimedata.org&amp;body=Here is the link to my search: " id="email-share">
+                            <button class="btn btn-sm btn-primary btn-block">
+                                <span class="glyphicon glyphicon glyphicon-send"></span>
+                                Share by E-mail</button>
+                        </a>
+                    </div>
+                </div>
+                <div id="sfim-table" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding:0px !important;">
+                    <table id="example" class="display table table-responsive" data-min="11" cellspacing="0" width="100%">
+                        <tfoot>
+                          <tr>
 
-  </div>
-  <!-- /.container -->
+                          </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
 
+            <div style="clear: both"></div>
+            
+            <!-- <footer class="small">
+              <p>Data from <a href="https://data.sfgov.org/" target="_blank">SF OpenData</a>.</p>
+            </footer> -->
+            
+            <!-- Feedback Modal -->
+            <div class="modal fade" id="myModal" role="dialog" tabindex="-1">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">Feedback</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form action="https://formspree.io/crime.data.sf@gmail.com" method="post">
+                                <div>
+                                    <p>Please provide your email address so we can contact you with any questions. We will not share your information or spam you.</p>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputName">Name</label> 
+                                    <input type="text" id="inputName" class="form-control" name="name" placeholder="Jane Doe">
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail">Email</label> 
+                                    <input type="email" id="inputEmail" class="form-control" name="email" placeholder="jane.doe@example.com">
+                                </div>
+                                <label>Is this website easy to use?</label>
+                                <br>
+                                <label class="radio-inline">
+                                  <input type="radio" name="Is this website easy to use?" value="yes"> Yes
+                                </label>
+                                <label class="radio-inline">
+                                  <input type="radio" name="Is this website easy to use?" value="somewhat"> Somewhat
+                                </label>
+                                <label class="radio-inline">
+                                  <input type="radio" name="Is this website easy to use?" value="no"> No
+                                </label>
+                                <div class="form-group"></div>
+                                <label>How likely are you to use this website for professional or personal needs?</label>
+                                <label class="radio-inline">
+                                  <input type="radio" value="highly-likely" name="How likely are you to use?"> Highly likely
+                                </label>
+                                <label class="radio-inline">
+                                  <input type="radio" value="somewhat-likely" name="How likely are you to use?"> Somewhat likely
+                                </label>
+                                <label class="radio-inline">
+                                  <input type="radio" value="unlikely" name="How likely are you to use?"> Unlikely
+                                </label>
+                                <div class="form-group"></div>
+                                <div class="form-group">
+                                    <p>If you selected 'No' or 'Unlikely' above, please tell us how we can improve.</p>
+                                    <label for="textArea">Comments</label> 
+                                    <textarea class="form-control" id="textArea" name="general comments" rows="4"></textarea>
+                                </div>
+                                <div>
+                                    <!-- This hidden input field is to thrwart scrapers -->
+                                    <input name="_gotcha" style="display: none" type="text">
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-default" data-dismiss="modal" type="button">Close</button> <button class="btn btn-primary" type="submit" value="Send">Send</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+             </div>
+            
+        <!-- Load jQuery from Google's CDN, so that it is likely to be already in the client's cache -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
-  <!-- Bootstrap core JavaScript
-    ================================================== -->
-  <!-- Placed at the end of the document so the pages load faster -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-  <!-- Latest compiled and minified JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-  <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.js'></script>
-  <script src='/moment.js'></script>
-  <script src='/daterangepicker.js'></script>
-  <script src="/jquery.dstk.js"></script>
-  <script src="/jquery.nouislider.all.min.js"></script>
-  <script src="/typeahead.bundle.js"></script>
-  <script>
-  $(function() {
-    var dstk = $.DSTK();
-    var startD = moment().subtract(29, 'days').format('YYYY-MM-DD'),
-      endD = moment().format('YYYY-MM-DD');
+        <!-- Load pre-made scripts from vendors -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/URI.js/1.18.1/URI.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/URI.js/1.18.1/jquery.URI.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="//api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.js"></script>
+        <script src="//api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js"></script>
+        <script src="//api.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.2.3/leaflet.draw.js"></script>
+        <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+        <script src="//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+        <script src="//cdn.datatables.net/buttons/1.2.1/js/dataTables.buttons.min.js"></script>
+        <script src="//cdn.datatables.net/buttons/1.2.1/js/buttons.colVis.min.js"></script>
+        <script src="//cdn.datatables.net/fixedheader/3.1.2/js/dataTables.fixedHeader.min.js"></script>
+        <script src="js/vendor/google-analytics.js"></script>
+        <script src="js/vendor/moment.js"></script>
+        <script src="js/vendor/daterangepicker.js"></script>
+        <script src="js/vendor/jquery.nouislider.all.min.js"></script>
+        <script src="js/vendor/bootstrap3-typeahead.js"></script>
+        <script src="js/vendor/leaflet.sleep.js"></script>
 
-    $('#daterange').val(moment().subtract(29, 'days').format('MM/DD/YYYY') + ' - ' + moment().format('MM/DD/YYYY'))
+        <!-- Load services -->
+        <script src="js/services/endpoints.js"></script>
+        <script src="js/services/tokens.js"></script>
+        <script src="js/services/addressService.js"></script>
+        <script src="js/services/incidentService.js"></script>
 
-    $('#daterange').daterangepicker({
-        ranges: {
-          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-          'This Month': [moment().startOf('month'), moment().endOf('month')],
-          'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
-          'This Quarter': [moment().startOf('quarter'), moment().endOf('quarter')],
-          'Last Quarter': [moment().subtract(3, 'months').startOf('quarter'), moment().subtract(3, 'months').endOf('quarter')],
-          'This Year': [moment().startOf('year'), moment()],
-          'Last Year': [moment().subtract(1, 'year').startOf('year'), moment().subtract(1, 'year').endOf('year')]
-        },
-        startDate: moment().subtract(29, 'days'),
-        endDate: moment(),
-        format: 'MM/DD/YYYY'
-      },
-      function(start, end) {
-        startD = start.format('YYYY-MM-DD');
-        endD = end.format('YYYY-MM-DD');
-        $('#daterange').val(start.format('MM/DD/YYYY') + ' - ' + end.format('MM/DD/YYYY'));
-      }
-    );
+        <!-- Load modules -->
+        <script src="js/modules/viewModel.js"></script>
+        <script src="js/modules/urlSearch.js"></script>
+        <script src="js/modules/history.js"></script>
+        <script src="js/modules/form.js"></script>
+        <script src="js/modules/map.js"></script>
+        <script src="js/modules/datasetLinks.js"></script>
+        <script src="js/modules/table.js"></script>
+        <script src="js/modules/page.js"></script>
 
-    $('#range-slider').noUiSlider({
-      start: [1320],
-      step: 1,
-      connect: 'lower',
-      range: {
-        'min': [0],
-        'max': [5280]
-      }
-    });
-
-    $('#range-slider').on({
-      slide: function() {
-        radius.setRadius($(this).val() * .3048);
-      }
-    })
-
-    $("#range-slider").Link('lower').to($('#range-slider-input'), null, wNumb({
-      decimals: 0
-    }));
-
-    L.mapbox.accessToken = 'pk.eyJ1IjoiZGF0YXNmIiwiYSI6Ilo3bVlHRDQifQ.7gkiPnZtioL8CnCvJ5z9Bg';
-    var map = L.mapbox.map('map', 'datasf.j9b9ihf0').setView([37.767806, -122.438153], 12);
-    var geoJsonLayer = L.geoJson();
-    var center = L.mapbox.featureLayer().addTo(map);
-    var centerLat, centerLon;
-    var radius = L.circle([50.5, 30.5], 200).addTo(map);
-    var geoJsonLayer = L.mapbox.featureLayer().addTo(map);
-
-    /*
-    var addresses = new Bloodhound({
-      datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
-      queryTokenizer: Bloodhound.tokenizers.whitespace,
-      remote: 'http://api.tiles.mapbox.com/v4/geocode/mapbox.places/%QUERY.json?access_token=pk.eyJ1IjoiZGF0YXNmIiwiYSI6Ilo3bVlHRDQifQ.7gkiPnZtioL8CnCvJ5z9Bg'
-    });
-
-    addresses.initialize();
-
-    $('.typeahead').typeahead(null, {
-      name: 'addresses',
-      displayKey: 'value', // if not set, will default to 'value',
-      source: addresses.ttAdapter()
-    });*/
-
-    $('.typeahead').on('keypress', function(e) {
-      console.log(encodeURIComponent($(e.target).val()));
-      if ($(e.target).val().length > 3) {
-        var url = "//pelias.mapzen.com/suggest"
-        var params = {
-          input: $(e.target).val(),
-          lat: 37.76,
-          lon: -122.43,
-          zoom: 12
-        }
-        $.getJSON(url, params, function(d) {
-          $("#suggestresults").empty();
-          $("#suggestresults").show();
-          console.log(d);
-          $.each(d.features, function(key, val) {
-            var result = $('<li>').html(val.properties.text);
-            result.attr('data-index', key);
-            $("#suggestresults").append(result);
-          });
-          $("#suggestresults li").on('click', function(e) {
-            center.setGeoJSON(d.features[$(e.target).attr('data-index')]);
-            centerLat = d.features[$(e.target).attr('data-index')].geometry.coordinates[1];
-            centerLon = d.features[$(e.target).attr('data-index')].geometry.coordinates[0];
-            $('#inputAddress').val($(e.target).html());
-            $('#suggestresults').hide();
-          })
-        });
-      }
-
-    });
-
-    $('#formaddress').submit(function() {
-      var datageojson;
-      var datasetAPI = "https://data.sfgov.org/resource/tmnf-yvry.json";
-      var feet = $('#range-slider-input').val();
-      var meters = feet * .3048;
-      var datasetUrl = datasetAPI + "?$where=date >= '" + startD + "' AND date <= '" + endD + "' AND within_circle(location," + centerLat + "," + centerLon + "," + meters + ")&$order=date DESC";
-
-      $.getJSON(datasetUrl, function(data) {
-        geojsondata = toGeojson(data, 'location');
-        console.log(datasetUrl);
-        radius.setLatLng([centerLat, centerLon])
-        radius.setRadius(meters);
-
-        geoJsonLayer.on('layeradd', function(e) {
-          var marker = e.layer,
-            feature = marker.feature;
-
-          var popupContent = feature.properties.category;
-
-          marker.bindPopup(popupContent);
-        });
-        console.log(geojsondata);
-        geoJsonLayer.setGeoJSON(geojsondata);
-      });
-      event.preventDefault();
-    });
-
-    // This toGeojson function was made from
-    // lovingly borrowed code from the inimitable
-    // chelm (https://github.com/chelm and the socrata-koop
-    // project: https://github.com/chelm/koop-socrata
-
-    function toGeojson(json, locationField) {
-      if (!json || !json.length) {
-        console.log('Failed to get data');
-      } else {
-        var geojson = {
-          type: 'FeatureCollection',
-          features: []
-        };
-        var geojsonFeature;
-        json.forEach(function(feature, i) {
-          geojsonFeature = {
-            type: 'Feature',
-            geometry: {},
-            id: i + 1
-          };
-          if (feature && locationField) {
-            if (feature[locationField] && feature[locationField].latitude && feature[locationField].longitude) {
-              geojsonFeature.geometry.coordinates = [parseFloat(feature[locationField].longitude), parseFloat(feature[locationField].latitude)];
-              geojsonFeature.geometry.type = 'Point';
-              delete feature.location;
-              geojsonFeature.properties = feature;
-              geojson.features.push(geojsonFeature);
-            }
-          } else if (feature && feature.latitude && feature.longitude) {
-            geojsonFeature.geometry.coordinates = [parseFloat(feature.longitude), parseFloat(feature.latitude)];
-            geojsonFeature.geometry.type = 'Point';
-            geojsonFeature.properties = feature;
-            geojson.features.push(geojsonFeature);
-          } else {
-            geojsonFeature.geometry = null;
-            geojsonFeature.properties = feature;
-            geojson.features.push(geojsonFeature);
-          }
-          geojsonFeature.properties['marker-size'] = "small";
-          geojsonFeature.properties['marker-color'] = "#333";
-        });
-        return geojson;
-      }
-    };
-  });
-  </script>
-</body>
-
+        <!-- Start the application -->
+        <script src="js/start.js"></script>
+    </body>
 </html>

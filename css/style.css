@@ -1,0 +1,268 @@
+body {
+  margin-top: 25px;
+  font-family: "Libre Franklin";
+  font-weight: 400;
+}
+
+h1 {
+  text-align: center;
+  font-family: "Montserrat";
+  font-size: 50px;
+
+}
+h2 {
+  text-align: center;
+  font-size: 25px;
+  font-family: "Libre Franklin";
+  font-weight: 300;
+  color: #428bca;
+  padding-top: 0px;
+  padding-bottom: 35px;
+  margin-top: 0px;
+}
+
+.subheader{
+  font-size: 11px;
+  font-weight: 400;
+  padding-top: 5px;
+}
+
+#feedback-btn {
+  text-align: right;
+}
+
+/*.mapboxgl-popup {
+
+}*/
+
+#beta {
+  font-weight: 500;
+  font-size: 16px;
+  text-align: left;
+  color: #428bca;
+}
+
+a {
+  font-weight: 500;
+}
+
+#sfim-controls, #address-control, #slider-control, #date-control{
+    padding:0px !important;
+}
+/*#slider-control{
+    padding-top:32px !important;
+}*/
+#slider-number-control{
+  padding-right: 25px;
+  padding-left: 25px;
+}
+
+#slider-control .slider-body{
+  width:250px; 
+	margin: 0 auto;
+  padding-right: 20px;
+}
+
+.table-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#map{
+   height:500px;
+   margin-top:5px;
+   padding:0px !important;
+}
+
+.dropdown-menu {
+	z-index: 1001;
+    background: white;
+    border-radius: 4px;
+    padding:5px;
+    max-width:100%;
+    border: thin solid #d3d3d3;
+}
+.dropdown-menu li a {
+    margin-bottom:3px; 
+	padding:5px;
+}
+.dropdown-menu li.active a,
+.dropdown-menu li.active a:focus,
+.dropdown-menu li.active a:hover {
+	cursor:pointer;
+	border-radius: 4px;
+    background-color: #d3d3d3;
+}
+
+#searchgroup {
+  position: relative;
+}
+.dataTables_filter{
+  padding-left: 20px;
+}
+
+.circle {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: 40px;
+  -webkit-box-sizing: border-box;
+  border: solid 10px rgba(255, 255, 255, 0.2);
+  border-top-color: #FFF;
+  -webkit-animation: spin 1s infinite linear;
+  margin: auto auto;
+  top: 200px;
+}
+
+@-webkit-keyframes spin { 
+  100% { 
+    -webkit-transform: rotate(360deg); 
+  } 
+} 
+
+.loading {
+  z-index: 1001;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  background: rgba(0,0,0,.6);
+}
+
+#btns-export div{
+    padding: 10px 10px 10px 0px;
+}
+#btns-export .right{
+   padding:10px 0px;
+}
+.pagination>li>a, .pagination>li>span{
+  padding: 3px 6px;
+}
+
+footer {
+  margin-top: 2em;
+  text-align: center;
+}
+
+@media (max-width: 425px){
+  .container{
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+
+  body {
+    font-size: 11px;
+  }
+
+  h1{
+    font-size: 21px;
+    margin-top: 35px;
+  }
+
+  h2{
+    font-size: 16px;
+  }
+
+  #slider-control .slider-body{
+    width: 100%;
+    padding-right: 0;
+    margin: 0;
+  }
+
+   #slider-number-control{
+      padding-left:0px !important;
+      padding-right:0px !important;
+  }
+    /*#slider-control{
+      padding-left:0px !important;
+      padding-right:0px !important;
+      padding-top: 20px !important;
+      padding-bottom: 20px !important;    
+  }*/
+
+  .mobile {
+    display: none;
+  }
+
+  .dataTables_filter, .dt-buttons{
+    display: none;
+  }
+
+  .dataTables_info{
+    font-size: 11px;
+  }
+
+  .input-sm{
+    font-size: 10px;
+    padding: 0px;
+  }
+
+  div.dataTables_length select{
+    width: 50px;
+  }
+
+  #beta {
+    font-size: 12px;
+  }
+
+  .leaflet-popup-content {
+    width: 200px;
+  }
+
+}
+
+@media (min-width: 426px) and (max-width: 768px){
+  body{
+    font-size: 12px;
+  }
+
+  h1{
+    font-size: 40px;
+  }
+
+  #slider-control .slider-body{
+    width: 0;
+    padding-right: 0;
+  }
+
+  #slider-control .slider-body{
+    width: 100%;
+    padding-right: 0;
+    margin: 0;
+  }
+
+    /*#slider-number-control{
+	    padding-left:0px !important;
+		  padding-right:0px !important;
+  }
+    #slider-control {
+	    padding-left:0px !important;
+		  padding-right:0px !important;
+      padding-top: 20px !important;
+      padding-bottom: 20px !important;		
+	}*/
+	#btns-export div{
+	    padding:5px 0px !important;
+	}
+
+  .tablet .div.dt-button {
+    display: none;
+    font-size: 12px;
+  }
+  
+  #beta {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 991px){
+    #slider-number-control{
+	    padding-left:0px !important;
+		  padding-right:0px !important;
+	}
+	#btns-export div{
+	    padding:5px 0px !important;
+	}
+}
