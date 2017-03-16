@@ -25,14 +25,35 @@ Create a single place for all universities and colleges in the United States to 
  - **Front-end developer!** Yup. Self-explanatory if you read the above paragraph. Bonus points if you love APIs and are up for the challenge of keeping the whole project browser-based... even the coming versions.
  - **Future project lead!** If you're interested managing in this project, come check it out asap and get up to speed... then build it out so any police department in the country can use it. **Time savings in the multiple thousands of workdays across the entire U.S.**
 
+## How to properly use Github for this project
+If you want to contribute to this project please follow these instructions:
+- fork the repository in to your account
+- open terminal, cd to a folder you want your files saved in.
+- clone from your repository:
+`git clone https://github.com/youraccount/sf-crime-data`
+- setup upstream to main repository:
+`git remote add upstream https://github.com/sfbrigade/sf-crime-data`
+- make sure your upstream and origin are correct
+`git remote -v`
+- create a new branch for your feature, use logical naming for this branch:
+`git checkout <feature>``
+- make changes from your local folder. Everytime you work on it make sure to pull any updates:
+`git pull upstream master`
+- When your ready to submit changes:
+`git add <changed file names>``
+`git commit -m "type your message here"`
+`git push origin <branch>``
+- go to your git hub account in your browser and make a pull request from there in order to submit a
+pull request to the main repository. 
+
 ## Running Codebase Locally
 If you want to download the github repository and run the code locally on your Apple machine,
 - open terminal
-- go to the folder directory 
+- go to the folder directory
 - run 'python -m SimpleHTTPServer'
 
 ## Contributing: Getting Started
-* Attend a [Code for San Francisco](http://codeforsanfrancisco.org/events) orientation 
+* Attend a [Code for San Francisco](http://codeforsanfrancisco.org/events) orientation
 * Get on [Slack](http://c4sf.me/slack)
   * Add prj-sf-crime-data as a channel
 * Get on [GitHub](http://c4sf.me/joingithub)
@@ -68,7 +89,7 @@ However, the prototype has a few things that could be greatly improved (also lis
 
 ## Wouldn't It Be Cool If...
 When prompted to think about other uses for this web app, the SFPD crime data analysts asked for the following:
-* Ability to overlay data layers, such as PD district laters, sector layers (police beats), political jurisdictions, plots (9sq block areas), and national/state/local parks. 
+* Ability to overlay data layers, such as PD district laters, sector layers (police beats), political jurisdictions, plots (9sq block areas), and national/state/local parks.
 * Why? Police captains want to see what is going on in their jurisdiction, cops want to see what happened on their beats while they were off duty, the Mayor's Office wants to know what's going on in a particular area, and SFPD in general wants to know what's going on on their turf (hence the park layer). The Crime Data Analysis Team runs regular (weekly) reports for nearly all of these folks and the team could save even MORE time by sharing this web app with the entire SFPD, who could run their own reports by themselves.
 * Ability to see crime data over time (add beginning and ending time period filter).
-* Why? Every single captain of every single district (and anyone else who has to report to constituents) wants to know if they're up or down on crime over a specific period of time. 
+* Why? Every single captain of every single district (and anyone else who has to report to constituents) wants to know if they're up or down on crime over a specific period of time.
