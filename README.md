@@ -33,9 +33,9 @@ Create a single place for all universities and colleges in the United States to 
   `git clone https://github.com/youraccount/sf-crime-data`
   - setup upstream to main repository:
   `git remote add upstream https://github.com/sfbrigade/sf-crime-data`
-  - make sure your upstream and origin are correct
+  - make sure your upstream and origin are correct:
   `git remote -v`
-  - make edits in gh-pages branch
+  - make edits in gh-pages branch:
   `git checkout gh-pages`
   - make changes from your local folder. Everytime you work on it make sure to pull any updates:
   `git pull upstream master`
