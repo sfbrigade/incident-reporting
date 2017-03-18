@@ -25,15 +25,34 @@ Create a single place for all universities and colleges in the United States to 
  - **Front-end developer!** Yup. Self-explanatory if you read the above paragraph. Bonus points if you love APIs and are up for the challenge of keeping the whole project browser-based... even the coming versions.
  - **Future project lead!** If you're interested managing in this project, come check it out asap and get up to speed... then build it out so any police department in the country can use it. **Time savings in the multiple thousands of workdays across the entire U.S.**
 
+ ## Working in Github
+  If you want to contribute to this project please follow these instructions:
+  - fork the repository in to your account
+  - open terminal, cd to a folder you want your files saved in.
+  - clone from your repository:
+  `git clone https://github.com/youraccount/sf-crime-data`
+  - setup upstream to main repository:
+  `git remote add upstream https://github.com/sfbrigade/sf-crime-data`
+  - make sure your upstream and origin are correct
+  `git remote -v`
+  - make edits in gh-pages branch
+  `git checkout gh-pages`
+  - make changes from your local folder. Everytime you work on it make sure to pull any updates:
+  `git pull upstream master`
+  - When your ready to submit changes:
+  `git add <changed file names>'
+  `git commit -m "type your message here"`
+  `git push origin gh-pages'
+  - go to your git hub account in your browser and make a pull request from there. The dropdown should look like <Main Repo>/<gh-pages> to <Forked Repo>/<gh-pages>. 
+
 ## Running Codebase Locally
 If you want to download the github repository and run the code locally on your Apple machine,
 - open terminal
 - go to the folder directory
 - run 'python -m SimpleHTTPServer'
-- go to a browser and type in localhost:"PORT_NUMBER"
 
 ## Contributing: Getting Started
-* Attend a [Code for San Francisco](http://codeforsanfrancisco.org/events) orientation 
+* Attend a [Code for San Francisco](http://codeforsanfrancisco.org/events) orientation
 * Get on [Slack](http://c4sf.me/slack)
   * Add prj-sf-crime-data as a channel
 * Get on [GitHub](http://c4sf.me/joingithub)
@@ -43,6 +62,7 @@ If you want to download the github repository and run the code locally on your A
 * Review issues on ZenHub boards (within GitHub: sfbrigade/sf-crime-data)
 * Clone the site to your dev machine and get it running locally
   * See readme.md "Running Codebase Locally"
+  * See readme.md "Working in Github"
   * Alternately use your GitHub account's hosting option for gh-pages
 * Visit [SF OpenData](https://data.sfgov.org/)
   * Review [SFPD available data](https://data.sfgov.org/Public-Safety/SFPD-Incidents-from-1-January-2003/tmnf-yvry)
