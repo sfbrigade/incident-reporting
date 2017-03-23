@@ -38,12 +38,14 @@ Create a single place for all universities and colleges in the United States to 
   - make edits in gh-pages branch:
   `git checkout gh-pages`
   - make changes from your local folder. Everytime you work on it make sure to pull any updates:
-  `git pull upstream master`
+  `git pull upstream gh-pages`
   - When your ready to submit changes:
-  `git add <changed file names>'
-  `git commit -m "type your message here"`
-  `git push origin gh-pages'
-  - go to your git hub account in your browser and make a pull request from there. The dropdown should look like <Main Repo>/<gh-pages> to <Forked Repo>/<gh-pages>.
+```
+  git add <changed file names>
+  git commit -m "type your message here"
+  git push origin gh-pages
+```
+  - go to your git hub account in your browser and make a pull request from there. The dropdown should look like `Main Repo/gh-pages to Forked Repo/gh-pages`.
 
 ## Running Codebase Locally
 If you want to download the github repository and run the code locally on your Apple machine,
