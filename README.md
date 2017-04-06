@@ -45,7 +45,7 @@ Create a single place for all universities and colleges in the United States to 
   git commit -m "type your message here"
   git push origin gh-pages
 ```
-  - go to your git hub account in your browser and make a pull request from there. The dropdown should look like `Main Repo/gh-pages to Forked Repo/gh-pages`.
+  - go to your git hub account in your browser and make a pull request from there. The dropdown should look like Main Repo/gh-pages to Forked Repo/gh-pages.
 
 ## Running Codebase Locally
 If you want to download the github repository and run the code locally on your Apple machine,
