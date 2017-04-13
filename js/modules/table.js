@@ -18,14 +18,14 @@ var tableModule = (function(window, $) {
             data: "incidntnum",
             title: "Incident#",
             name: "incidntnum",
+            visible: false
         }, {
             data: "date",
             title: "Date",
             name: "date",
             render: function(data, type, row, meta) {
                 return moment(data).format('l')
-            },
-            visible: false
+            }
         }, {
             data: "time",
             title: "Time",
