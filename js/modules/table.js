@@ -56,7 +56,7 @@ var tableModule = (function(window, $) {
             title: "Resolution",
             name: "resolution",
         }, {
-            data: "cscategory", 
+            data: "cscategory",
             title: "CSCategory",
             name: "cscategory",
         }],
@@ -79,30 +79,30 @@ var tableModule = (function(window, $) {
             switch (true){
                 case incidentJson[i].category === "ARSON":
                     incidentJson[i].cscategory = "ARSON";
-                    break; 
+                    break;
                 case (incidentJson[i].category === "ASSAULT" &&
                     incidentJson[i].descript.includes("AGGRAVATED")):
-                    incidentJson[i].cscategory = "AGGRAVATED ASSAULT"; 
+                    incidentJson[i].cscategory = "AGGRAVATED ASSAULT";
                     break;
                 case (incidentJson[i].category === "ASSAULT" &&
                     incidentJson[i].descript.includes("DATING")):
-                    incidentJson[i].cscategory = "DATING VIOLENCE"; 
+                    incidentJson[i].cscategory = "DATING VIOLENCE";
                     break;
                 case (incidentJson[i].category === "ASSAULT" &&
-                    (incidentJson[i].descript.includes("HATE") || 
+                    (incidentJson[i].descript.includes("HATE") ||
                     incidentJson[i].descript.includes("TERROR"))):
-                    incidentJson[i].cscategory = "HATE CRIMES"; 
+                    incidentJson[i].cscategory = "HATE CRIMES";
                     break;
                 case (incidentJson[i].category === "ASSAULT" &&
                     incidentJson[i].descript.includes("STALKING")):
-                    incidentJson[i].cscategory = "STALKING"; 
+                    incidentJson[i].cscategory = "STALKING";
                     break;
                 case (incidentJson[i].category === "ASSAULT" &&
                     incidentJson[i].resolution.includes("ARREST") &&
-                    (incidentJson[i].descript.includes("WEAPON") || 
+                    (incidentJson[i].descript.includes("WEAPON") ||
                         incidentJson[i].descript.includes("GUN") ||
-                        incidentJson[i].descript.includes("KNIFE") || 
-                        incidentJson[i].descript.includes("FIREARM") || 
+                        incidentJson[i].descript.includes("KNIFE") ||
+                        incidentJson[i].descript.includes("FIREARM") ||
                         incidentJson[i].descript.includes("SHOOTING"))):
                     incidentJson[i].cscategory = "WEAPONS POSSESSION";
                     break;
@@ -110,29 +110,29 @@ var tableModule = (function(window, $) {
                     incidentJson[i].cscategory = "BURGLARY";
                     break;
                 case (incidentJson[i].category === "DRIVING UNDER THE INFLUENCE" &&
-                    incidentJson[i].descript.includes("ALCOHOL") && 
-                    incidentJson[i].resolution.includes("ARREST")): 
+                    incidentJson[i].descript.includes("ALCOHOL") &&
+                    incidentJson[i].resolution.includes("ARREST")):
                     incidentJson[i].cscategory = "LIQUOR LAW VIOLATIONS";
                     break;
                 case (incidentJson[i].category === "DRIVING UNDER THE INFLUENCE" &&
-                    incidentJson[i].descript.includes("DRUGS") && 
+                    incidentJson[i].descript.includes("DRUGS") &&
                     incidentJson[i].resolution.includes("ARREST")):
                     incidentJson[i].cscategory = "DRUG-RELATED VIOLATIONS";
                     break;
-                case (incidentJson[i].category === "DRUG/NARCOTIC" && 
+                case (incidentJson[i].category === "DRUG/NARCOTIC" &&
                     incidentJson[i].resolution.includes("ARREST")):
                     incidentJson[i].cscategory = "DRUG-RELATED VIOLATIONS";
                     break;
-                case (incidentJson[i].category === "DRUNKENNESS" && 
-                    incidentJson[i].resolution.includes("ARREST")): 
+                case (incidentJson[i].category === "DRUNKENNESS" &&
+                    incidentJson[i].resolution.includes("ARREST")):
                     incidentJson[i].cscategory = "LIQUOR LAW VIOLATIONS";
                     break;
-                case (incidentJson[i].category === "LIQUOR LAWS" && 
-                    incidentJson[i].resolution.includes("ARREST")): 
+                case (incidentJson[i].category === "LIQUOR LAWS" &&
+                    incidentJson[i].resolution.includes("ARREST")):
                     incidentJson[i].cscategory = "LIQUOR LAW VIOLATIONS";
                     break;
                 case (incidentJson[i].category === "OTHER OFFENSES" &&
-                    incidentJson[i].descript.includes("ALCOHOL") && 
+                    incidentJson[i].descript.includes("ALCOHOL") &&
                     incidentJson[i].resolution.includes("ARREST")):
                     incidentJson[i].cscategory = "LIQUOR LAW VIOLATIONS";
                     break;
@@ -141,15 +141,15 @@ var tableModule = (function(window, $) {
                     break;
                 case (incidentJson[i].category === "SECONDARY CODES" &&
                     incidentJson[i].descript.includes("DOMESTIC VIOLENCE")):
-                    incidentJson[i].cscategory = "DOMESTIC VIOLENCE"; 
+                    incidentJson[i].cscategory = "DOMESTIC VIOLENCE";
                     break;
                 case (incidentJson[i].category === "SECONDARY CODES" &&
                     incidentJson[i].descript.includes("PREJUDICE")):
-                    incidentJson[i].cscategory = "HATE CRIMES"; 
+                    incidentJson[i].cscategory = "HATE CRIMES";
                     break;
                 case (incidentJson[i].category === "SECONDARY CODES" &&
                     incidentJson[i].descript.includes("WEAPONS")):
-                    incidentJson[i].cscategory = "WEAPONS POSSESSION"; 
+                    incidentJson[i].cscategory = "WEAPONS POSSESSION";
                     break;
                 case (incidentJson[i].category === "SEX OFFENSES, FORCIBLE" ||
                     incidentJson[i].category === "SEX OFFENSES, NON FORCIBLE"):
@@ -158,14 +158,14 @@ var tableModule = (function(window, $) {
                 case incidentJson[i].category === "VEHICLE THEFT":
                     incidentJson[i].cscategory = "MOTOR VEHICLE THEFT";
                     break;
-                case (incidentJson[i].category === "WEAPON LAWS" && 
+                case (incidentJson[i].category === "WEAPON LAWS" &&
                         incidentJson[i].resolution.includes("ARREST")):
                     incidentJson[i].cscategory = "WEAPONS POSSESSION";
                     break;
                 default:
                     incidentJson[i].cscategory = "NONE";
-                    break; 
-            }  
+                    break;
+            }
         }
         return incidentJson;
     }
@@ -174,7 +174,7 @@ var tableModule = (function(window, $) {
         _table.clear();
 
         incidentJson = _csCategoryCheck(incidentJson);
-        
+
 
         _table.rows.add(incidentJson);
         _table.draw();
@@ -182,7 +182,8 @@ var tableModule = (function(window, $) {
 
     return {
         init: _init,
-        loadDataToTable: _loadDataToTable
+        loadDataToTable: _loadDataToTable,
+        csCategoryCheck: _csCategoryCheck
     };
 
 })(window, jQuery);

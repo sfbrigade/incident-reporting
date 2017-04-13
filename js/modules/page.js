@@ -30,6 +30,7 @@ var pageModule = (function(window, $) {
         _showLoader();
         incidentService.findIncidentsWithPolygonSearch(params, function(incidentsJson) {
             _hideLoader();
+            incidentsJson = tableModule.csCategoryCheck(incidentsJson);
             mapModule.drawPolygonIncidents(_convertJsonToGeoJson(incidentsJson));
             tableModule.loadDataToTable(incidentsJson);
         });
@@ -66,6 +67,8 @@ var pageModule = (function(window, $) {
         _showLoader();
         incidentService.findIncidentsWithRadialSearch(params, function(incidentsJson) {
             _hideLoader();
+            /*write something here to call cscategory function to add it to JSON*/
+            incidentsJson = tableModule.csCategoryCheck(incidentsJson);
             mapModule.drawRadialIncidents(_convertJsonToGeoJson(incidentsJson));
             tableModule.loadDataToTable(incidentsJson);
         });
@@ -97,8 +100,8 @@ var pageModule = (function(window, $) {
         var geoJson = { type: 'FeatureCollection', features: [] };
         json.forEach(function(incidentJson) {
             var incidentGeometry = incidentJson.location;
-            delete incidentJson.location; 
-            var incidentProperties = incidentJson; 
+            delete incidentJson.location;
+            var incidentProperties = incidentJson;
             geoJson.features.push({
                 type: 'Feature',
                 geometry: incidentGeometry,
