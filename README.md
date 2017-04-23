@@ -81,6 +81,37 @@ If you want to download the github repository and run the code locally on your A
   * Continue to collaborate and code using Slack and GitHub
 * If "life happens" and you won't have time to finish an issue due to new demands, do let us know, so we can re-assign.
 
+
+## Stack
+
+The following are among the libraries and extensions used:
+
+[Bootstrap](http://getbootstrap.com/) – "a sleek, intuitive, and powerful mobile first front-end framework for faster and easier web development"
+
++ [Bootstrap 3 Typeahead](https://github.com/bassjobsen/Bootstrap-3-Typeahead)
++ [Date Range Picker](http://www.daterangepicker.com/)
+
+[jQuery ](https://jquery.com/) - "The Write Less, Do More, JavaScript Library"
+
++ [URI.js](https://medialize.github.io/URI.js/jquery-uri-plugin.html) – "URI.js offers simple, yet powerful ways of working with query string, has a number of URI-normalization functions and converts relative/absolute paths"
++ [DataTables](https://datatables.net/)
+    + [Buttons](https://datatables.net/extensions/buttons/)
+    + [colVis](https://datatables.net/extensions/colvis/)
+    + [FixedHeader](https://datatables.net/extensions/fixedheader/)
+
+[Leaflet](http://leafletjs.com/) – "An open-source JavaScript library for mobile-friendly interactive maps"
+
++ [Mapbox](https://www.mapbox.com/) - "The location platform for developers and designers
+APIs for maps, geocoding, driving directions, and more"
++ [Leaflet.markercluster](https://github.com/Leaflet/Leaflet.markercluster) – "Provides Beautiful Animated Marker Clustering functionality"
++ [Leaflet.draw](https://github.com/Leaflet/Leaflet.draw) - "Adds support for drawing and editing vectors and markers"
++ [Leaflet.Sleep](https://github.com/CliffCloud/Leaflet.Sleep) – "Prevent unwanted scroll capturing; let your map sleep"
+
+[Moment.js](http://momentjs.com/) – "Parse, validate, manipulate, and display dates and times in JavaScript"
+ 
+[noUiSlider](https://refreshless.com/nouislider/) – "JavaScript Range Slider"
+
+
 ## What's Next?
 After speaking with the Crime Data Analysis Unit at the SFPD on 5/6/16 for initial user **research**, the current prototype satisfies their minimum needs. They plan to direct future inquiring universities and colleges directly to [http://sfcrimedata.org]. Great!
 
@@ -88,7 +119,6 @@ However, the prototype has a few things that could be greatly improved (also lis
 * Columns displayed on the desktop version of the data table are insufficient (posted in an issue)
 * Would be great for a "Clery Act"-specific report
 * Display the source of the data and when it was last updated
-
 
 ## Wouldn't It Be Cool If...
 When prompted to think about other uses for this web app, the SFPD crime data analysts asked for the following:
