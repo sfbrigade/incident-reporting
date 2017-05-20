@@ -10,107 +10,22 @@ var mapModule = (function(window,$) {
         properties: { 'marker-size': 'large' }
     };
 /*the following objects sets the custom marker icons for each CSCategory*/
+    var iconArray= ["crimeIcon", "assaultIcon","arsonIcon","burglaryIcon","datingIcon","domesticIcon",
+    "drugsIcon",'hateIcon',"liquorIcon","motorIcon", "robberyIcon", "sexIcon", "stalkingIcon","weaponsIcon"];
 
-  var assaultIcon = L.icon({
-	iconUrl: './gfx/assault.png',
-  iconSize: [20, 32],
-  iconAnchor: [12, 31],
-  popupAnchor: [-3, -22],
-  });
+    for(i=0; i<iconArray.length; i++){
+      iconArray[i]= L.icon(
+          {
+              iconUrl: './gfx/' + iconArray[i] + '.svg',
+              iconSize: [40,40],
+              iconAnchor: [12.31],
+              popupAnchor: [-3,-22]
+          }
+        )
+      }
 
-  var arsonIcon = L.icon({
-  iconUrl: './gfx/arson.png',
-  iconSize: [20, 32],
-  iconAnchor: [12, 31],
-  popupAnchor: [-3, -22],
-  });
-
-  var drugsIcon = L.icon({
-	iconUrl: './gfx/drugs.png',
-  iconSize: [20, 32],
-  iconAnchor: [12, 31],
-  popupAnchor: [-3, -22],
-  });
-
-  var burglaryIcon = L.icon({
-  iconUrl: './gfx/burglary.png',
-  iconSize: [20, 32],
-  iconAnchor: [12, 31],
-  popupAnchor: [-3, -22],
-  });
-
-  var robberyIcon = L.icon({
-  iconUrl: './gfx/robbery.png',
-  iconSize: [20, 32],
-  iconAnchor: [12, 31],
-  popupAnchor: [-3, -22],
-  });
-
-  var weaponsIcon = L.icon({
-  iconUrl: './gfx/weapons.png',
-  iconSize: [20, 32],
-  iconAnchor: [12, 31],
-  popupAnchor: [-3, -22],
-  });
-
-  var sexIcon = L.icon({
-  iconUrl: './gfx/sex.png',
-  iconSize: [20, 32],
-  iconAnchor: [12, 31],
-  popupAnchor: [-3, -22],
-  });
-
-  var hateIcon = L.icon({
-  iconUrl: './gfx/hate.png',
-  iconSize: [20, 32],
-  iconAnchor: [12, 31],
-  popupAnchor: [-3, -22],
-  });
-
-  var liquorIcon = L.icon({
-  iconUrl: './gfx/liquor.png',
-  iconSize: [20, 32],
-  iconAnchor: [12, 31],
-  popupAnchor: [-3, -22],
-  });
-
-  var stalkingIcon = L.icon({
-  iconUrl: './gfx/stalking.png',
-  iconSize: [20, 32],
-  iconAnchor: [12, 31],
-  popupAnchor: [-3, -22],
-  });
-
-  var domesticIcon = L.icon({
-  iconUrl: './gfx/domestic.png',
-  iconSize: [20, 32],
-  iconAnchor: [12, 31],
-  popupAnchor: [-3, -22],
-  });
-
-  var datingIcon = L.icon({
-  iconUrl: './gfx/dating.png',
-  iconSize: [20, 32],
-  iconAnchor: [12, 31],
-  popupAnchor: [-3, -22],
-  });
-
-  var motorIcon = L.icon({
-  iconUrl: './gfx/motor.png',
-  iconSize: [20, 32],
-  iconAnchor: [12, 31],
-  popupAnchor: [-3, -22],
-  });
-
-  var crimeIcon = L.icon({
-  iconUrl: './gfx/crime.png',
-  iconSize: [20, 32],
-  iconAnchor: [12, 31],
-  popupAnchor: [-3, -22],
-  });
-/*the following is an added object property that dictates t
-he icon properties using Mapbox Maki icons replaced with leaflet code*/
-    /*var INCIDENT_MARKER_PROPERTIES = {
+/*the following is old code using built in Mapbox Maki icons
+    var INCIDENT_MARKER_PROPERTIES = {
         'marker-color': '#000080',
         'marker-symbol': 'police',
         'marker-size': 'small'
@@ -152,8 +67,15 @@ he icon properties using Mapbox Maki icons replaced with leaflet code*/
         searchAreaGroup.addTo(map);
 
         map.on('draw:created', _afterDraw);
-
-    }
+        var legend = L.control({position: 'bottomright'});
+        legend.onAdd = function (map) {
+        var div = L.DomUtil.create('div', 'info legend');
+        div.innerHTML = '<div> <button type="button" id="legend-button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myLegend">'+
+                        'Legend </button></div>'
+         return div;
+         };
+         legend.addTo(map);
+         }
 
     function _afterDraw(e) {
         switch(e.layerType) {
@@ -246,35 +168,52 @@ he icon properties using Mapbox Maki icons replaced with leaflet code*/
         /*the following is the actual descision making process of assigning icons to a certain CSCategory*/
         incidentLayer.setGeoJSON(incidentGeoJson).eachLayer(function(layer) {
           //this line below changes icon using leaflet Icon objects.
-          if (layer.feature.properties.cscategory==="BURGLARY"){
-            layer.setIcon(burglaryIcon);
-          } else if(layer.feature.properties.cscategory==="AGGRAVATED ASSAULT"){
-            layer.setIcon(assaultIcon);
-          } else if(layer.feature.properties.cscategory==="ROBBERY"){
-            layer.setIcon(robberyIcon);
-          } else if(layer.feature.properties.cscategory==="WEAPONS POSSESION"){
-            layer.setIcon(weaponsIcon);
-          } else if(layer.feature.properties.cscategory==="DRUG-RELATED VIOLATIONS"){
-            layer.setIcon(drugsIcon);
-          } else if(layer.feature.properties.cscategory==="SEX OFFENSES"){
-            layer.setIcon(sexIcon);
-          } else if(layer.feature.properties.cscategory==="HATE CRIMES"){
-            layer.setIcon(hateIcon);
-          } else if(layer.feature.properties.cscategory==="ARSON"){
-            layer.setIcon(arsonIcon);
-          } else if(layer.feature.properties.cscategory==="LIQUOR LAW"){
-            layer.setIcon(liquorIcon);
-          } else if(layer.feature.properties.cscategory==="STALKING"){
-            layer.setIcon(stalkingIcon);
-          } else if(layer.feature.properties.cscategory==="DOMESTIC VIOLENCE"){
-            layer.setIcon(domesticIcon);
-          } else if(layer.feature.properties.cscategory==="DATING VIOLENCE"){
-            layer.setIcon(datingIcon);
-          } else if(layer.feature.properties.cscategory==="MOTOR VEHICLE THEFT"){
-            layer.setIcon(motorIcon);
-          }else {
-            layer.setIcon(crimeIcon);
+          switch(true) {
+          case (layer.feature.properties.cscategory==="AGGRAVATED ASSAULT"):
+              layer.setIcon(iconArray[1]);
+              break;
+          case(layer.feature.properties.cscategory==="ARSON"):
+              layer.setIcon(iconArray[2]);
+              break;
+          case (layer.feature.properties.cscategory==="BURGLARY"):
+              layer.setIcon(iconArray[3]);
+              break;
+          case (layer.feature.properties.cscategory==="DATING VIOLENCE"):
+              layer.setIcon(iconArray[4]);
+              break;
+          case(layer.feature.properties.cscategory==="DOMESTIC VIOLENCE"):
+              layer.setIcon(iconArray[5]);
+              break;
+          case(layer.feature.properties.cscategory==="DRUG-RELATED VIOLATIONS"):
+              layer.setIcon(iconArray[6]);
+              break;
+          case(layer.feature.properties.cscategory==="HATE CRIMES"):
+              layer.setIcon(iconArray[7])
+              break;
+          case(layer.feature.properties.cscategory==="LIQUOR LAW"):
+              layer.setIcon(iconArray[8]);
+              break;
+          case(layer.feature.properties.cscategory==="MOTOR VEHICLE THEFT"):
+              layer.setIcon(iconArray[9]);
+              break;
+          case(layer.feature.properties.cscategory==="ROBBERY"):
+              layer.setIcon(iconArray[10]);
+              break;
+          case(layer.feature.properties.cscategory==="SEX OFFENSES"):
+              layer.setIcon(iconArray[11]);
+              break;
+          case(layer.feature.properties.cscategory==="STALKING"):
+              layer.setIcon(iconArray[12]);
+              break;
+          case(layer.feature.properties.cscategory==="WEAPONS POSSESION"):
+              layer.setIcon(iconArray[13]);
+              break;
+
+            default:
+              layer.setIcon(iconArray[0]);
+            break;
           }
+
             incidentClusterGroup.addLayer(layer);
             layer.bindPopup(_buildIncidentPopupContent(layer.feature.properties));
         });

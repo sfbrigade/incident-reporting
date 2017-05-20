@@ -21,6 +21,11 @@ h2 {
   margin-top: 0px;
 }
 
+.row img {
+  display: block;
+  width: 50px;
+  height: 50px;
+}
 .subheader{
   font-size: 11px;
   font-weight: 400;
@@ -58,7 +63,7 @@ a {
 }
 
 #slider-control .slider-body{
-  width:250px; 
+  width:250px;
 	margin: 0 auto;
   padding-right: 20px;
 }
@@ -84,7 +89,7 @@ a {
     border: thin solid #d3d3d3;
 }
 .dropdown-menu li a {
-    margin-bottom:3px; 
+    margin-bottom:3px;
 	padding:5px;
 }
 .dropdown-menu li.active a,
@@ -115,11 +120,11 @@ a {
   top: 200px;
 }
 
-@-webkit-keyframes spin { 
-  100% { 
-    -webkit-transform: rotate(360deg); 
-  } 
-} 
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
 
 .loading {
   z-index: 1001;
@@ -179,7 +184,7 @@ footer {
       padding-left:0px !important;
       padding-right:0px !important;
       padding-top: 20px !important;
-      padding-bottom: 20px !important;    
+      padding-bottom: 20px !important;
   }*/
 
   .mobile {
@@ -241,7 +246,7 @@ footer {
 	    padding-left:0px !important;
 		  padding-right:0px !important;
       padding-top: 20px !important;
-      padding-bottom: 20px !important;		
+      padding-bottom: 20px !important;
 	}*/
 	#btns-export div{
 	    padding:5px 0px !important;
@@ -251,7 +256,7 @@ footer {
     display: none;
     font-size: 12px;
   }
-  
+
   #beta {
     font-size: 12px;
   }
