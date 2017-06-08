@@ -18,8 +18,8 @@ var mapModule = (function(window,$) {
           {
               iconUrl: './gfx/' + iconArray[i] + '.svg',
               iconSize: [40,40],
-              iconAnchor: [12.31],
-              popupAnchor: [-3,-22]
+              iconAnchor: [20,40],
+              popupAnchor: [0,-35]
           }
         )
       }
@@ -190,7 +190,7 @@ var mapModule = (function(window,$) {
           case(layer.feature.properties.cscategory==="HATE CRIMES"):
               layer.setIcon(iconArray[7])
               break;
-          case(layer.feature.properties.cscategory==="LIQUOR LAW"):
+          case(layer.feature.properties.cscategory==="LIQUOR LAW VIOLATIONS"):
               layer.setIcon(iconArray[8]);
               break;
           case(layer.feature.properties.cscategory==="MOTOR VEHICLE THEFT"):
@@ -205,7 +205,7 @@ var mapModule = (function(window,$) {
           case(layer.feature.properties.cscategory==="STALKING"):
               layer.setIcon(iconArray[12]);
               break;
-          case(layer.feature.properties.cscategory==="WEAPONS POSSESION"):
+          case(layer.feature.properties.cscategory==="WEAPONS POSSESSION"):
               layer.setIcon(iconArray[13]);
               break;
 
