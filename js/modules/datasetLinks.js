@@ -18,13 +18,11 @@ var datasetLinksModule = (function(window, $) {
     }
 
     function _setEmailLink() {
-      var link = encodeURIComponent(location.href);
+      var link = encodeURIComponent(encodeURI(location.href));
       if(location.href.includes('searchGeoJson')){
         link = decodeURIComponent(location.href);
       }
-
       return "mailto:?subject=My results from sfcrimedata.org&body=Here is the link to my search: %0A%0A" + link;
-
     }
 
     function _refreshDownloadButtonUrls(query) {
