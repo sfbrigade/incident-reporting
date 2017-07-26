@@ -29,8 +29,9 @@ var datasetLinksModule = (function(window, $) {
         $("#download-csv").attr("href", _getCsvLink(query));
         $("#open-geojsonio").attr("href", _getGeojsonio(query));
         $("#open-cartodb").attr("href", _getCartoDbUrl(query));
-        $("#email-share").click(
-            function(){ $("#email-share").attr("href", _setEmailLink());});
+        $("#email-share").click(function(){ 
+          $("#email-share").attr("href", _setEmailLink());
+        });
     }
 
     return {
