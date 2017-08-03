@@ -57,9 +57,10 @@ var formModule = (function(window, $) {
                 'This Year': [moment().startOf('year'), moment()],
                 'Last Year': [moment().subtract(1, 'year').startOf('year'), moment().subtract(1, 'year').endOf('year')]
             },
-            startDate: moment(),
-            endDate: moment().subtract(29, 'days'),
-            format: 'MM/DD/YYYY'
+            startDate: moment().subtract(44, 'days'),
+            endDate: moment().subtract(14, 'days'),
+            format: 'MM/DD/YYYY',
+            opens: "left"
         }, function(startDate, endDate) {
             var formattedStartDate = startDate.format('MM/DD/YYYY');
             var formattedEndDate = endDate.format('MM/DD/YYYY');
