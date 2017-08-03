@@ -1,7 +1,7 @@
 var viewModelModule = (function(window, $) {
     var DEFAULTS = {
-        startDate: moment().subtract(29, 'days').format('YYYY-MM-DD'),
-        endDate: moment().format('YYYY-MM-DD'),
+        startDate: moment().subtract(44, 'days').format('YYYY-MM-DD'),
+        endDate: moment().subtract(14, 'days').format('YYYY-MM-DD'),
         latitude: 37.768,
         longitude: -122.44,
         searchRadius: 1320,
