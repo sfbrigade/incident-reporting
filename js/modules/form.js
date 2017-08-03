@@ -60,7 +60,7 @@ var formModule = (function(window, $) {
             startDate: moment().subtract(44, 'days'),
             endDate: moment().subtract(14, 'days'),
             format: 'MM/DD/YYYY',
-            opens: "left" //sjc
+            opens: "left"
         }, function(startDate, endDate) {
             var formattedStartDate = startDate.format('MM/DD/YYYY');
             var formattedEndDate = endDate.format('MM/DD/YYYY');
