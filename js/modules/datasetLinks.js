@@ -20,7 +20,8 @@ var datasetLinksModule = (function(window, $) {
     function _setEmailLink() {
       var link = encodeURIComponent(encodeURI(location.href));
       if(location.href.includes('searchGeoJson')){
-        link = decodeURIComponent(location.href);
+        var searchGeoJsonStringIndex = location.href.indexOf('searchGeoJson')
+        link = encodeURIComponent(location.href.substring(0, searchGeoJsonStringIndex)) + decodeURIComponent(location.href.substring(searchGeoJsonStringIndex));
       }
       return "mailto:?subject=My results from sfcrimedata.org&body=Here is the link to my search: %0A%0A" + link;
     }
