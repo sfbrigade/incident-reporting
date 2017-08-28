@@ -1,7 +1,4 @@
 var datasetLinksModule = (function(window, $) {
-    const appState ={
-        emailURL:""
-    }
     function _getCartoDbUrl(query) {
         return "//oneclick.cartodb.com/?"
           + "file=" + encodeURIComponent(resourceEndpointsModule.INCIDENTS_API_GEOJSON_URL + query)
