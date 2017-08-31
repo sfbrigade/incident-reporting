@@ -1,13 +1,13 @@
 var mapModule = (function(window, $) {
-  var MAPBOX_ACCESS_TOKEN = resourceTokensModule.MAPBOX_ACCESS_TOKEN
-  var MAPBOX_MAP_STYLE_ID = 'lightfox.1n10e3dp'
-  var MAP_CONTAINER_ELEMENT_ID = 'map'
+  var MAPBOX_ACCESS_TOKEN = resourceTokensModule.MAPBOX_ACCESS_TOKEN;
+  var MAPBOX_MAP_STYLE_ID = 'lightfox.1n10e3dp';
+  var MAP_CONTAINER_ELEMENT_ID = 'map';
 
   var SEARCH_MARKER_GEOJSON = {
     type: 'Feature',
     geometry: { type: 'Point' },
     properties: { 'marker-size': 'large' }
-  }
+  };
   /*the following objects sets the custom marker icons for each CSCategory*/
   var iconArray = [
     'crimeIcon',
@@ -24,7 +24,7 @@ var mapModule = (function(window, $) {
     'sexIcon',
     'stalkingIcon',
     'weaponsIcon'
-  ]
+  ];
 
   for (i = 0; i < iconArray.length; i++) {
     iconArray[i] = L.icon({
@@ -32,7 +32,7 @@ var mapModule = (function(window, $) {
       iconSize: [40, 40],
       iconAnchor: [20, 40],
       popupAnchor: [0, -35]
-    })
+    });
   }
 
   /*the following is old code using built in Mapbox Maki icons
@@ -48,7 +48,7 @@ var mapModule = (function(window, $) {
     weight: 5,
     fillOpacity: 0.2,
     opacity: 0.5
-  }
+  };
 
   var DRAW_CONTROL_SETTINGS = {
     draw: {
@@ -57,144 +57,144 @@ var mapModule = (function(window, $) {
       rectangle: { shapeOptions: SHAPE_STYLE_SETTINGS },
       circle: { shapeOptions: SHAPE_STYLE_SETTINGS }
     }
-  }
+  };
 
   var INCIDENT_CLUSTER_LAYER_SETTINGS = {
     showCoverageOnHover: false
-  }
+  };
 
-  var METERS_PER_FOOT = 0.3048
+  var METERS_PER_FOOT = 0.3048;
 
-  var searchAreaGroup = L.featureGroup()
-  var incidentLayer, incidentClusterGroup
+  var searchAreaGroup = L.featureGroup();
+  var incidentLayer, incidentClusterGroup;
 
-  var map
+  var map;
 
   function _init() {
-    L.mapbox.accessToken = MAPBOX_ACCESS_TOKEN
-    map = L.mapbox.map(MAP_CONTAINER_ELEMENT_ID, MAPBOX_MAP_STYLE_ID)
+    L.mapbox.accessToken = MAPBOX_ACCESS_TOKEN;
+    map = L.mapbox.map(MAP_CONTAINER_ELEMENT_ID, MAPBOX_MAP_STYLE_ID);
 
-    var drawControl = new L.Control.Draw(DRAW_CONTROL_SETTINGS).addTo(map)
-    searchAreaGroup.addTo(map)
+    var drawControl = new L.Control.Draw(DRAW_CONTROL_SETTINGS).addTo(map);
+    searchAreaGroup.addTo(map);
 
-    map.on('draw:created', _afterDraw)
-    var legend = L.control({ position: 'bottomright' })
+    map.on('draw:created', _afterDraw);
+    var legend = L.control({ position: 'bottomright' });
     legend.onAdd = function(map) {
-      var div = L.DomUtil.create('div', 'info legend')
+      var div = L.DomUtil.create('div', 'info legend');
       div.innerHTML =
         '<div> <button type="button" id="legend-button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myLegend">' +
-        'Legend </button></div>'
-      return div
-    }
-    legend.addTo(map)
+        'Legend </button></div>';
+      return div;
+    };
+    legend.addTo(map);
   }
 
   function _afterDraw(e) {
     switch (e.layerType) {
       case 'polygon':
-        _afterDrawPolygon(e)
-        break
+        _afterDrawPolygon(e);
+        break;
       case 'rectangle':
-        _afterDrawRectangle(e)
-        break
+        _afterDrawRectangle(e);
+        break;
       case 'circle':
-        _afterDrawCircle(e)
-        break
+        _afterDrawCircle(e);
+        break;
       case 'marker':
-        _afterDrawMarker(e)
-        break
+        _afterDrawMarker(e);
+        break;
     }
   }
 
   function _afterDrawPolygon(e) {
-    console.log(e)
-    viewModelModule.searchShapeType = 'polygon'
-    viewModelModule.searchGeoJson = e.layer.toGeoJSON()
-    viewModelModule.latitude = e.layer._latlngs[0].lat
-    viewModelModule.longitude = e.layer._latlngs[0].lng
-    viewModelModule.searchAddress = null
-    pageModule.loadIncidentData()
+    console.log(e);
+    viewModelModule.searchShapeType = 'polygon';
+    viewModelModule.searchGeoJson = e.layer.toGeoJSON();
+    viewModelModule.latitude = e.layer._latlngs[0].lat;
+    viewModelModule.longitude = e.layer._latlngs[0].lng;
+    viewModelModule.searchAddress = null;
+    pageModule.loadIncidentData();
   }
 
   function _afterDrawRectangle(e) {
-    console.log(e)
-    viewModelModule.searchShapeType = 'polygon'
-    viewModelModule.searchGeoJson = e.layer.toGeoJSON()
-    viewModelModule.latitude = e.layer._latlngs[1].lat
-    viewModelModule.longitude = e.layer._latlngs[1].lng
-    viewModelModule.searchAddress = null
-    pageModule.loadIncidentData()
+    console.log(e);
+    viewModelModule.searchShapeType = 'polygon';
+    viewModelModule.searchGeoJson = e.layer.toGeoJSON();
+    viewModelModule.latitude = e.layer._latlngs[1].lat;
+    viewModelModule.longitude = e.layer._latlngs[1].lng;
+    viewModelModule.searchAddress = null;
+    pageModule.loadIncidentData();
   }
 
   function _afterDrawCircle(e) {
-    viewModelModule.searchShapeType = 'radial'
-    viewModelModule.latitude = e.layer._latlng.lat
-    viewModelModule.longitude = e.layer._latlng.lng
-    viewModelModule.searchRadius = _convertFromMetersToFeet(e.layer._mRadius)
-    viewModelModule.searchAddress = null
-    pageModule.loadIncidentData()
+    viewModelModule.searchShapeType = 'radial';
+    viewModelModule.latitude = e.layer._latlng.lat;
+    viewModelModule.longitude = e.layer._latlng.lng;
+    viewModelModule.searchRadius = _convertFromMetersToFeet(e.layer._mRadius);
+    viewModelModule.searchAddress = null;
+    pageModule.loadIncidentData();
   }
 
   function _afterDrawMarker(e) {
-    viewModelModule.searchShapeType = 'radial'
-    viewModelModule.latitude = e.layer._latlng.lat
-    viewModelModule.longitude = e.layer._latlng.lng
-    viewModelModule.searchAddress = null
-    pageModule.loadIncidentData()
+    viewModelModule.searchShapeType = 'radial';
+    viewModelModule.latitude = e.layer._latlng.lat;
+    viewModelModule.longitude = e.layer._latlng.lng;
+    viewModelModule.searchAddress = null;
+    pageModule.loadIncidentData();
   }
 
   function _drawPolygonIncidents(incidentGeoJson) {
-    _drawPolygonSearchArea()
-    _drawIncidents(incidentGeoJson)
+    _drawPolygonSearchArea();
+    _drawIncidents(incidentGeoJson);
   }
 
   function _drawRadialIncidents(incidentGeoJson) {
-    _drawRadialSearchArea()
-    _drawIncidents(incidentGeoJson)
+    _drawRadialSearchArea();
+    _drawIncidents(incidentGeoJson);
   }
 
   function _drawPolygonSearchArea() {
-    var searchAreaGeoJson = viewModelModule.searchGeoJson
+    var searchAreaGeoJson = viewModelModule.searchGeoJson;
     var searchAreaLayer = L.mapbox
       .featureLayer(searchAreaGeoJson)
-      .setStyle(SHAPE_STYLE_SETTINGS)
+      .setStyle(SHAPE_STYLE_SETTINGS);
 
-    searchAreaGroup.clearLayers().addLayer(searchAreaLayer)
+    searchAreaGroup.clearLayers().addLayer(searchAreaLayer);
   }
 
   function _drawRadialSearchArea() {
     var latitude = viewModelModule.latitude,
       longitude = viewModelModule.longitude,
-      radius = _convertFromFeetToMeters(viewModelModule.searchRadius)
+      radius = _convertFromFeetToMeters(viewModelModule.searchRadius);
 
     var searchMarkerGeoJson = $.extend(true, {}, SEARCH_MARKER_GEOJSON, {
       geometry: { coordinates: [longitude, latitude] }
-    })
+    });
 
-    var searchMarkerLayer = L.mapbox.featureLayer(searchMarkerGeoJson)
-    var searchAreaLayer = L.circle([latitude, longitude], radius)
+    var searchMarkerLayer = L.mapbox.featureLayer(searchMarkerGeoJson);
+    var searchAreaLayer = L.circle([latitude, longitude], radius);
 
     searchAreaGroup
       .clearLayers()
       .addLayer(searchMarkerLayer)
-      .addLayer(searchAreaLayer)
+      .addLayer(searchAreaLayer);
   }
   /*_drawIncident function is the actual rendering process of putting a incdidentGeoJson on
     to a map*/
   function _drawIncidents(incidentGeoJson) {
     if (incidentLayer) {
-      map.removeLayer(incidentLayer)
+      map.removeLayer(incidentLayer);
     }
 
     if (incidentClusterGroup) {
-      map.removeLayer(incidentClusterGroup)
+      map.removeLayer(incidentClusterGroup);
     }
     /*makes a MapBox featurelayer that adds geojson to a map read lyzidiamond.com/posts/external-geojson-mapbox*/
-    incidentLayer = L.mapbox.featureLayer()
+    incidentLayer = L.mapbox.featureLayer();
     /*maker clustering with leaflet read: asmaloney.com/2015/06/code/clustering-markers-on-leaflet-maps*/
     incidentClusterGroup = new L.MarkerClusterGroup(
       INCIDENT_CLUSTER_LAYER_SETTINGS
-    )
+    );
     /*the below code is the old way of assigning icon to a incident using built in mapbox Maki icons*/
     /*$.each(incidentGeoJson.features, function(index, feature) {
             $.extend(feature.properties, INCIDENT_MARKER_PROPERTIES);
@@ -204,83 +204,83 @@ var mapModule = (function(window, $) {
       //this line below changes icon using leaflet Icon objects.
       switch (true) {
         case layer.feature.properties.cscategory === 'AGGRAVATED ASSAULT':
-          layer.setIcon(iconArray[1])
-          break
+          layer.setIcon(iconArray[1]);
+          break;
         case layer.feature.properties.cscategory === 'ARSON':
-          layer.setIcon(iconArray[2])
-          break
+          layer.setIcon(iconArray[2]);
+          break;
         case layer.feature.properties.cscategory === 'BURGLARY':
-          layer.setIcon(iconArray[3])
-          break
+          layer.setIcon(iconArray[3]);
+          break;
         case layer.feature.properties.cscategory === 'DATING VIOLENCE':
-          layer.setIcon(iconArray[4])
-          break
+          layer.setIcon(iconArray[4]);
+          break;
         case layer.feature.properties.cscategory === 'DOMESTIC VIOLENCE':
-          layer.setIcon(iconArray[5])
-          break
+          layer.setIcon(iconArray[5]);
+          break;
         case layer.feature.properties.cscategory === 'DRUG-RELATED VIOLATIONS':
-          layer.setIcon(iconArray[6])
-          break
+          layer.setIcon(iconArray[6]);
+          break;
         case layer.feature.properties.cscategory === 'HATE CRIMES':
-          layer.setIcon(iconArray[7])
-          break
+          layer.setIcon(iconArray[7]);
+          break;
         case layer.feature.properties.cscategory === 'LIQUOR LAW VIOLATIONS':
-          layer.setIcon(iconArray[8])
-          break
+          layer.setIcon(iconArray[8]);
+          break;
         case layer.feature.properties.cscategory === 'MOTOR VEHICLE THEFT':
-          layer.setIcon(iconArray[9])
-          break
+          layer.setIcon(iconArray[9]);
+          break;
         case layer.feature.properties.cscategory === 'ROBBERY':
-          layer.setIcon(iconArray[10])
-          break
+          layer.setIcon(iconArray[10]);
+          break;
         case layer.feature.properties.cscategory === 'SEX OFFENSES':
-          layer.setIcon(iconArray[11])
-          break
+          layer.setIcon(iconArray[11]);
+          break;
         case layer.feature.properties.cscategory === 'STALKING':
-          layer.setIcon(iconArray[12])
-          break
+          layer.setIcon(iconArray[12]);
+          break;
         case layer.feature.properties.cscategory === 'WEAPONS POSSESSION':
-          layer.setIcon(iconArray[13])
-          break
+          layer.setIcon(iconArray[13]);
+          break;
 
         default:
-          layer.setIcon(iconArray[0])
-          break
+          layer.setIcon(iconArray[0]);
+          break;
       }
 
-      incidentClusterGroup.addLayer(layer)
-      layer.bindPopup(_buildIncidentPopupContent(layer.feature.properties))
-    })
-    incidentLayer.clearLayers()
+      incidentClusterGroup.addLayer(layer);
+      layer.bindPopup(_buildIncidentPopupContent(layer.feature.properties));
+    });
+    incidentLayer.clearLayers();
 
     map
       .addLayer(incidentLayer)
       .addLayer(incidentClusterGroup)
-      .fitBounds(searchAreaGroup.getBounds())
+      .fitBounds(searchAreaGroup.getBounds());
   }
 
   function _buildIncidentPopupContent(properties) {
-    var newDate = properties.date
+    var newDate = properties.date;
     var formattedDate =
       newDate.slice(5, 7) +
       '/' +
       newDate.slice(8, 10) +
       '/' +
-      newDate.slice(0, 4)
-    return properties.descript + ' on ' + formattedDate
+      newDate.slice(0, 4);
+    return properties.descript + ' on ' + formattedDate;
   }
 
   function _convertFromFeetToMeters(feet) {
-    return feet * METERS_PER_FOOT
+    return feet * METERS_PER_FOOT;
   }
 
   function _convertFromMetersToFeet(meters) {
-    return meters / METERS_PER_FOOT
+    return meters / METERS_PER_FOOT;
   }
 
   return {
     init: _init,
     drawPolygonIncidents: _drawPolygonIncidents,
     drawRadialIncidents: _drawRadialIncidents
-  }
-})(window, jQuery)
+  };
+})(window, jQuery);
