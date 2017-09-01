@@ -107,7 +107,6 @@ var mapModule = (function(window, $) {
   }
 
   function _afterDrawPolygon(e) {
-    console.log(e);
     viewModelModule.searchShapeType = 'polygon';
     viewModelModule.searchGeoJson = e.layer.toGeoJSON();
     viewModelModule.latitude = e.layer._latlngs[0].lat;
@@ -117,7 +116,6 @@ var mapModule = (function(window, $) {
   }
 
   function _afterDrawRectangle(e) {
-    console.log(e);
     viewModelModule.searchShapeType = 'polygon';
     viewModelModule.searchGeoJson = e.layer.toGeoJSON();
     viewModelModule.latitude = e.layer._latlngs[1].lat;
