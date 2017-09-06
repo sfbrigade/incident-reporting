@@ -1,5 +1,4 @@
 var pageModule = (function(window, $) {
-
     var METERS_PER_FOOT = 0.3048;
     var LOAD_INCIDENT_DATA_OPTION_DEFAULTS = {
         pushState: true,
@@ -7,13 +6,24 @@ var pageModule = (function(window, $) {
     };
 
     function _loadIncidentData(options) {
-        options = $.extend(true, {}, LOAD_INCIDENT_DATA_OPTION_DEFAULTS, options || {});
+        options = $.extend(
+            true,
+            {},
+            LOAD_INCIDENT_DATA_OPTION_DEFAULTS,
+            options || {}
+        );
 
-        switch(viewModelModule.searchShapeType) {
-            case 'polygon': _loadPolygonIncidentData(options); break;
-            case 'radial': _loadRadialIncidentData(options); break;
+        switch (viewModelModule.searchShapeType) {
+            case 'polygon':
+                _loadPolygonIncidentData(options);
+                break;
+            case 'radial':
+                _loadRadialIncidentData(options);
+                break;
 
-            default: _loadRadialIncidentData(options); break;
+            default:
+                _loadRadialIncidentData(options);
+                break;
         }
     }
 
@@ -23,15 +33,28 @@ var pageModule = (function(window, $) {
         var query = incidentService.buildPolygonIncidentDataQuery(params);
         datasetLinksModule.refreshDownloadButtonUrls(query);
 
-        if(options.pushState) {
+        if (options.pushState) {
             historyModule.saveSearchUrl();
         }
 
+        var shouldApplyAddressFromCoordinates =
+            typeof options.reverseGeocoding === 'function'
+                ? options.reverseGeocoding()
+                : options.reverseGeocoding;
+
+        if (shouldApplyAddressFromCoordinates) {
+            _applyAddressFromViewModelCoordinates();
+        }
+
         _showLoader();
-        incidentService.findIncidentsWithPolygonSearch(params, function(incidentsJson) {
+        incidentService.findIncidentsWithPolygonSearch(params, function(
+            incidentsJson
+        ) {
             _hideLoader();
             incidentsJson = tableModule.csCategoryCheck(incidentsJson);
-            mapModule.drawPolygonIncidents(_convertJsonToGeoJson(incidentsJson));
+            mapModule.drawPolygonIncidents(
+                _convertJsonToGeoJson(incidentsJson)
+            );
             tableModule.loadDataToTable(incidentsJson);
         });
     }
@@ -50,22 +73,25 @@ var pageModule = (function(window, $) {
         var query = incidentService.buildRadialIncidentDataQuery(params);
         datasetLinksModule.refreshDownloadButtonUrls(query);
 
-        if(options.pushState) {
+        if (options.pushState) {
             historyModule.saveSearchUrl();
         }
 
         var shouldApplyAddressFromCoordinates =
             typeof options.reverseGeocoding === 'function'
-            ? options.reverseGeocoding() : options.reverseGeocoding;
+                ? options.reverseGeocoding()
+                : options.reverseGeocoding;
 
-        if(shouldApplyAddressFromCoordinates) {
+        if (shouldApplyAddressFromCoordinates) {
             _applyAddressFromViewModelCoordinates();
         }
 
         _applySearchRadiusFromViewModel();
 
         _showLoader();
-        incidentService.findIncidentsWithRadialSearch(params, function(incidentsJson) {
+        incidentService.findIncidentsWithRadialSearch(params, function(
+            incidentsJson
+        ) {
             _hideLoader();
             /*write something here to call cscategory function to add it to JSON*/
             incidentsJson = tableModule.csCategoryCheck(incidentsJson);
@@ -87,7 +113,9 @@ var pageModule = (function(window, $) {
     function _applyAddressFromViewModelCoordinates() {
         var latitude = viewModelModule.latitude;
         var longitude = viewModelModule.longitude;
-        addressService.getAddressFromCoordinates(latitude, longitude, function(address) {
+        addressService.getAddressFromCoordinates(latitude, longitude, function(
+            address
+        ) {
             $('#input-address').val(address.features[0].place_name);
         });
     }
@@ -117,8 +145,10 @@ var pageModule = (function(window, $) {
     }
 
     function shouldApplyReverseGeocoding() {
-        return !viewModelModule.searchAddress
-            || viewModelModule.searchShapeType === 'polygon';
+        return (
+            !viewModelModule.searchAddress ||
+            viewModelModule.searchShapeType === 'polygon'
+        );
     }
 
     function _showLoader() {
@@ -132,5 +162,4 @@ var pageModule = (function(window, $) {
     return {
         loadIncidentData: _loadIncidentData
     };
-
 })(window, jQuery);
