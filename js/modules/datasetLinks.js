@@ -24,16 +24,26 @@ var datasetLinksModule = (function(window, $) {
     }
 
     function _refreshDownloadButtonUrls(query) {
-        $("#download-csv").attr("href", _getCsvLink(query));
         $("#open-geojsonio").attr("href", _getGeojsonio(query));
         $("#open-cartodb").attr("href", _getCartoDbUrl(query));
-        $("#email-share").click(function(){ 
+        $("#email-share").click(function(){
           $("#email-share").attr("href", _setEmailLink());
         });
+        // Dynamically set query property for csv downloads
+        this.query = query;
     }
 
-    return {
+    var interface = {
         refreshDownloadButtonUrls: _refreshDownloadButtonUrls
     };
+
+    // Set csv download click handler once
+    $("#download-csv").click(function() {
+        // Use dynamic csv query link
+        var url = _getCsvLink(interface.query);
+        csvModule.download(url);
+    });
+
+    return interface;
 
 })(window, jQuery);
