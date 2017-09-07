@@ -23,6 +23,19 @@
         <link rel="stylesheet" href="css/daterangepicker.css">
         <link rel="stylesheet" href="css/jquery.nouislider.css">
         <link rel="stylesheet" href="css/style.css">
+        <!-- zac's formValidationScript -->
+        <script>
+function validateForm() {
+    var x = document.forms["myForm"]["email"].value;
+    var atpos = x.indexOf("@");
+    var dotpos = x.lastIndexOf(".");
+    if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length) {
+        alert("Please enter a valid e-mail address");
+        return false;
+    }
+}
+        </script>
+
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
           <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -154,13 +167,19 @@
                                 <div>
                                     <p>Please provide your email address so we can contact you with any questions. We will not share your information or spam you.</p>
                                 </div>
-                                <div class="form-group">
+
+                                    <!-- 
+                                    zac email form validator
+                                     -->                                <div class="form-group">
                                     <label for="inputName">Name</label>
                                     <input type="text" id="inputName" class="form-control" name="name" placeholder="Jane Doe">
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputEmail">Email</label>
-                                    <input type="email" id="inputEmail" class="form-control" name="email" placeholder="jane.doe@example.com">
+                                    <form name="myForm" action="/action_page_post.php" onsubmit="return validateForm();" method="post">
+                                      Email: <input type="text" name="email">
+                                    <input type="submit" value="Submit">
+                                    </form>
+
                                 </div>
                                 <label>Is this website easy to use?</label>
                                 <br>
