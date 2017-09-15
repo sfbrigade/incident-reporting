@@ -96,7 +96,16 @@ var mapModule = (function(window,$) {
         viewModelModule.latitude = e.layer._latlngs[0].lat;
         viewModelModule.longitude = e.layer._latlngs[0].lng;
         viewModelModule.searchAddress = null;
-        pageModule.loadIncidentData({ reverseGeocoding: false });
+        pageModule.loadIncidentData();
+    }
+
+    function _afterDrawRectangle(e) {
+        viewModelModule.searchShapeType = 'polygon';
+        viewModelModule.searchGeoJson = e.layer.toGeoJSON();
+        viewModelModule.latitude = e.layer._latlngs[1].lat;
+        viewModelModule.longitude = e.layer._latlngs[1].lng;
+        viewModelModule.searchAddress = null;
+        pageModule.loadIncidentData();
     }
 
     function _afterDrawCircle(e) {
