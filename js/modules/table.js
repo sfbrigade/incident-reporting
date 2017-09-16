@@ -170,20 +170,30 @@ var tableModule = (function(window, $) {
         return incidentJson;
     }
 
+    // Returns object of incidentnum -> cscategory
+    // Call only after _loadDataToTable
+    function _csCategoriesForIncidents() {
+        return this.incidentJson.reduce(function(memo, incident) {
+          memo[incident["incidntnum"]] = incident["cscategory"]
+          return memo;
+        }, {});
+    }
+
     function _loadDataToTable(incidentJson) {
         _table.clear();
 
-        incidentJson = _csCategoryCheck(incidentJson);
+        this.incidentJson = _csCategoryCheck(incidentJson);
 
 
-        _table.rows.add(incidentJson);
+        _table.rows.add(this.incidentJson);
         _table.draw();
     }
 
     return {
         init: _init,
         loadDataToTable: _loadDataToTable,
-        csCategoryCheck: _csCategoryCheck
+        csCategoryCheck: _csCategoryCheck,
+        csCategoriesForIncidents: _csCategoriesForIncidents
     };
 
 })(window, jQuery);
