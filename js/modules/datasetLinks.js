@@ -38,10 +38,10 @@ var datasetLinksModule = (function(window, $) {
     };
 
     // Set csv download click handler once
-    $("#download-csv").click(function() {
+    $("#download-csv").click(function(event) {
         // Use dynamic csv query link
         var url = _getCsvLink(interface.query);
-        csvModule.download(url);
+        csvModule.download(event, url);
     });
 
     return interface;

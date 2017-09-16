@@ -35,17 +35,12 @@ var csvModule = (function(window, $) {
         }, csvLink)
     }
 
-    function _downloadCsv(dataLink) {
-        var evt = document.createEvent("MouseEvents");
-        evt.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
-
-        var link = document.createElement("a");
-        link.download = "San Francisco Crime Data Export.csv";
-        link.href = encodeURI(dataLink);
-        link.dispatchEvent(evt);
+    function _downloadCsv(event, dataLink) {
+        event.currentTarget.download = "San Francisco Crime Data Export.csv";
+        event.currentTarget.href = encodeURI(dataLink);
     }
 
-    function _onCsvFetchSuccess(data) {
+    function _onCsvFetchSuccess(event, data) {
         rows = _parseCsvData(data);
 
         // Add Campus Safety Category column header
@@ -58,11 +53,11 @@ var csvModule = (function(window, $) {
         var dataLink = _formatCsv(rows);
 
         // Download the newly formatted csv
-        _downloadCsv(dataLink);
+        _downloadCsv(event, dataLink);
   }
 
-  function _fetchAndDownloadCsv(url) {
-    $.get(url, _onCsvFetchSuccess, 'text');
+  function _fetchAndDownloadCsv(event, url) {
+    $.get(url, _onCsvFetchSuccess.bind(this, event), 'text');
   }
 
   return {
