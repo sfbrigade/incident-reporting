@@ -13,12 +13,15 @@ var csvModule = (function(window, $) {
     function _addcsCategories(rows) {
         // Asscoate csCategory with csv data on incidntnum
         var csCategoriesForIncidents = tableModule.csCategoriesForIncidents();
-        return rows.slice(1).map(function(row) {
+        var headers = rows.slice(0, 1);
+        rows = rows.slice(1).map(function(row) {
             var incidentNum = row[4];
             var csCategory = csCategoriesForIncidents[incidentNum];
             row.push(csCategory);
             return row;
         });
+
+        return headers.concat(rows);
     }
 
     function _formatCsv(rows) {
