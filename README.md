@@ -83,9 +83,12 @@ Note: this repository takes advantage of [ZenHub](https://www.zenhub.io/). If yo
 If you want to download the github repository and run the code locally on your Apple machine,
 - open terminal
 - go to the folder directory
+If on python2
 - run 'python -m SimpleHTTPServer'
 - go to a browser and type in localhost:"PORT_NUMBER"
-
+If on python3 and Windows
+- run 'python -m http.server'
+- go to a browser and type in localhost:"PORT_NUMBER"
 
 ## Contributing: Promoting a Change to Production
 1. You have worked an issue and resolved it. Great!
