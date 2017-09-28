@@ -56,7 +56,7 @@ Note: this repository takes advantage of [ZenHub](https://www.zenhub.io/). If yo
 * If "life happens" and you won't have time to finish an issue due to new demands, do let us know, so we can re-assign.
 
 
-## Working in Github
+## Contributing: Working in Github
   If you want to contribute to this project please follow these instructions:
   - fork the repository in to your account
   - open terminal, cd to a folder you want your files saved in.
@@ -70,7 +70,7 @@ Note: this repository takes advantage of [ZenHub](https://www.zenhub.io/). If yo
   `git checkout gh-pages`
   - make changes from your local folder. Everytime you work on it make sure to pull any updates:
   `git pull upstream gh-pages`
-  - When your ready to submit changes:
+  - When you are ready to submit changes:
 ```
   git add <changed file names>
   git commit -m "type your message here"
@@ -79,12 +79,26 @@ Note: this repository takes advantage of [ZenHub](https://www.zenhub.io/). If yo
   - go to your git hub account in your browser and make a pull request from there. The dropdown should look like Main Repo/gh-pages to Forked Repo/gh-pages.
 
 
-## Running Codebase Locally
+## Contributing: Running Codebase Locally
 If you want to download the github repository and run the code locally on your Apple machine,
 - open terminal
 - go to the folder directory
 - run 'python -m SimpleHTTPServer'
 - go to a browser and type in localhost:"PORT_NUMBER"
+
+
+## Contributing: Promoting a Change to Production
+1. You have worked an issue and resolved it. Great!
+2. It works on your local web server. Great!
+3. Do a regression test to make sure nothing else broke.
+   * Use the test script at: https://drive.google.com/open?id=1AAy7PV08czDWLs1aG9ch5WvLqLZCWKWN8deguUiuv1Q
+4. Publish your changes to your personal public hosting location like GitHub pages or Firebase.
+5. Post a note on Slack channel #prj-sf-crime-data with your personal public hosting URL and ask the team to test.
+   * We need at least one other teammate to approve moving forward.
+6. Submit a pull request.
+   * Do not "pretty up" the code. That makes it super difficult to do a code review.
+   * Change only the lines that need to change to resolve the Issue.
+7. A team member will review the pull request, do a code review and perform the merge (or advise with any changes needed).
 
 
 ## Stack

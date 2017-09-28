@@ -27,6 +27,14 @@ var pageModule = (function(window, $) {
             historyModule.saveSearchUrl();
         }
 
+        var shouldApplyAddressFromCoordinates =
+            typeof options.reverseGeocoding === 'function'
+            ? options.reverseGeocoding() : options.reverseGeocoding;
+
+        if(shouldApplyAddressFromCoordinates) {
+            _applyAddressFromViewModelCoordinates();
+        }
+
         _showLoader();
         incidentService.findIncidentsWithPolygonSearch(params, function(incidentsJson) {
             _hideLoader();
