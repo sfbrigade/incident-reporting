@@ -79,8 +79,9 @@ var mapModule = (function(window,$) {
 
     function _afterDraw(e) {
         switch(e.layerType) {
-            case 'polygon':
-            case 'rectangle': _afterDrawPolygon(e);
+            case 'polygon': _afterDrawPolygon(e);
+                break;
+            case 'rectangle': _afterDrawRectangle(e);
                 break;
             case 'circle': _afterDrawCircle(e);
                 break;
@@ -92,7 +93,19 @@ var mapModule = (function(window,$) {
     function _afterDrawPolygon(e) {
         viewModelModule.searchShapeType = 'polygon';
         viewModelModule.searchGeoJson = e.layer.toGeoJSON();
-        pageModule.loadIncidentData({ reverseGeocoding: false });
+        viewModelModule.latitude = e.layer._latlngs[0].lat;
+        viewModelModule.longitude = e.layer._latlngs[0].lng;
+        viewModelModule.searchAddress = null;
+        pageModule.loadIncidentData();
+    }
+
+    function _afterDrawRectangle(e) {
+        viewModelModule.searchShapeType = 'polygon';
+        viewModelModule.searchGeoJson = e.layer.toGeoJSON();
+        viewModelModule.latitude = e.layer._latlngs[1].lat;
+        viewModelModule.longitude = e.layer._latlngs[1].lng;
+        viewModelModule.searchAddress = null;
+        pageModule.loadIncidentData();
     }
 
     function _afterDrawCircle(e) {
