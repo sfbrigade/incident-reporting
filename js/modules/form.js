@@ -96,4 +96,3 @@ var formModule = (function(window, $) {
     };
 
 })(window, jQuery);
-
