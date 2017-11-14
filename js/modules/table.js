@@ -57,7 +57,7 @@ var tableModule = (function(window, $) {
             name: "resolution",
         }, {
             data: "cscategory",
-            title: "CSCategory",
+            title: "Campus Safety Category",
             name: "cscategory",
         }],
         pageLength: 50,

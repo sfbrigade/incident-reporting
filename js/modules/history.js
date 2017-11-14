@@ -41,7 +41,7 @@ var historyModule = (function() {
         if(viewModelFieldName === 'searchRadius') {
             return parseInt(viewModelFieldValue);
         } else if(typeof(viewModelFieldValue) === 'number') {
-            return Number(viewModelFieldValue.toPrecision(5));
+            return Number(viewModelFieldValue);
         } else if(typeof(viewModelFieldValue) === 'object') {
             return JSON.stringify(viewModelFieldValue);
         }
