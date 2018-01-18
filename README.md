@@ -28,6 +28,28 @@ Create a single place for all universities and colleges in the United States to 
 Note: this repository takes advantage of [ZenHub](https://www.zenhub.io/). If you haven't added it to your Github yet, it's recommended to better understand how issues are prioritized.
 
 
+## Running Codebase Locally
+If you want to download the github repository and run the code locally on your Apple machine,
+- open terminal
+- go to the folder directory
+- run 'python -m SimpleHTTPServer'
+- go to a browser and type in localhost:"PORT_NUMBER"
+
+## Creating Your Own Test Site
+If you want your pull request apporoved, please make a test page so that the group can test your new functionality. You may use any hosting services as your own server, Heroku, or AWS. We prefer using [Github Pages](https://www.pages.github.io). Although it's convinient, github pages will only display when you have your files in a repo named username.github.io and all of your files are in the master branch. This gets a bit tricky.
+
+Follow these directions in order to create test site:
+- Make a new repo in your github called username.github.io (with username being your git login name)
+- Clone this repo anywhere on your computer: `git clone https://github.com/username/username.github.io.git` 
+- Copy and paste local files (your working files) to the folder you just cloned.
+- cd into your username.github.io folder
+- `git add -A`
+- `git commit` 
+- `git push origin master`
+- Go to www.username.github.io in your browser to make sure your test site is working.
+- Post your test site to our slack channel. 
+- Project members will test out your new functionality and we will let you know if it needs to be changed.
+
 ## Contributing: Getting Started
 * Attend a [Code for San Francisco](http://codeforsanfrancisco.org/events) orientation
 * Get on [Slack](http://c4sf.me/slack)
